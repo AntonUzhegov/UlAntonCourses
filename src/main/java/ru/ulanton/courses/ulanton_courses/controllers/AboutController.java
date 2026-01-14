@@ -3,17 +3,10 @@ package ru.ulanton.courses.ulanton_courses.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.swing.*;
-
 @Controller
-public class AllCoursesController {
-    @GetMapping("/hello/about")
+public class AboutController {
+    @GetMapping("/allCourses/about")
     public String about(){
         return "about";
-    }
-
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
     }
 }

@@ -16,12 +16,12 @@ public class HomeController {
         return "hello"; // templates/home.html
     }
 
-    @GetMapping("/c")
+    @GetMapping("/allCourses")
     public String courses() {
         return "allCourses";
     }
 
-    @GetMapping("/a")
+    @GetMapping("/about")
     public String about() {
         return "about";
     }
