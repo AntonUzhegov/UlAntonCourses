@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ulanton - Ошибка</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        body {
+            background-color: #0d1424;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .error-text {
+            font-size: 70px;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #5a9cff;
+            text-shadow: 0 0 20px rgba(90, 156, 255, 0.3);
+            margin: 0;
+        }
+
+        /* Адаптация для мобильных */
+        @media (max-width: 768px) {
+            .error-text {
+                font-size: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .error-text {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div>
+    <p class="error-text">Ара, ну нима пока такой страницы, выходи пожалуйста, не травмируй сервер</p>
+</div>
+</body>
+</html>
