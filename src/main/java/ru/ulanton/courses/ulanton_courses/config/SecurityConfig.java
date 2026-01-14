@@ -12,10 +12,9 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/courses", "/css/**", "/js/**").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
-                .formLogin(form -> form.permitAll())
+                .csrf(csrf -> csrf.disable()) // чтобы формы/POST не мешали во время разработки
                 .build();
     }
 }

@@ -4,11 +4,17 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     font-family: 'Montserrat', sans-serif;
     background-color: #0d1424;
     color: white;
     min-height: 100vh;
+    user-select: none;
 }
 
 /* Шапка - без разделителя, того же цвета что и тело */
@@ -23,13 +29,44 @@ header {
     z-index: 100;
 }
 
+/* ЛОГО Ulanton — больше и красивее */
 .logo {
-    font-weight: 600;
-    font-size: 28px;
-    letter-spacing: 1px;
+    font-weight: 1100;
+    font-size: clamp(54px, 5vw, 74px);
+    letter-spacing: 2px;
+
+    /* центр как и было */
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+
+    /* красота */
+    background: linear-gradient(90deg, #7dd3ff, #a78bfa, #22c55e);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    text-shadow:
+        0 0 18px rgba(125, 211, 255, 0.25),
+        0 0 30px rgba(167, 139, 250, 0.18);
+
+    user-select: none;
+    cursor: default;
+    transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.logo:hover {
+    transform: translateX(-50%) scale(1.03);
+    filter: brightness(1.15);
+}
+
+
+
+/* На маленьких экранах — не слишком огромная */
+@media (max-width: 1100px) {
+    .logo {
+        font-size: clamp(32px, 6vw, 48px);
+    }
 }
 
 /* Левые пункты меню */
@@ -56,12 +93,11 @@ header {
 }
 
 .menu-item a:hover {
-    color: #5a9cff;
+color: rgba(255,255,255,0.82);
 }
 
 /* Класс для активного элемента меню */
 .menu-item-active a {
-    /* font-weight: 800 !important; */
     color: #ffffff;
     position: relative;
 }
@@ -103,35 +139,28 @@ main {
     min-height: calc(100vh - 90px);
 }
 
-
-
-
-/* Контейнер для содержимого с отступом слева */
+/* Контейнер для содержимого - простой вариант на padding */
 .content-container {
-    max-width: 1200px;
+    /* max-width: 1200px; */
     margin: 0 auto;
+    padding: 0 20px;
 }
 
-/* Для широких экранов - отступ слева */
+@media (min-width: 768px) {
+    .content-container {
+        padding: 0 40px;
+    }
+}
+
 @media (min-width: 1200px) {
     .content-container {
-        margin-left: 40px;
-        margin-right: auto;
+        padding: 0 60px;
     }
 }
 
-/* Для очень широких экранов - больше отступ */
 @media (min-width: 1600px) {
     .content-container {
-        margin-left: 80px;
-    }
-}
-
-/* Для средних экранов - центрируем контент */
-@media (max-width: 1199px) {
-    .content-container {
-        margin-left: auto;
-        margin-right: auto;
+        padding: 0 80px;
     }
 }
 
@@ -169,6 +198,22 @@ h1 {
     .right-menu {
         margin-left: 30px;
     }
+}
+
+h1{
+  font-size: clamp(30px, 3.2vw, 58px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 14px;
+  text-shadow: 0 14px 40px rgba(0,0,0,.35);
+}
+
+.it-accent{
+  color: transparent;
+  background: linear-gradient(90deg, #7dd3ff, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 0 22px rgba(125,211,255,.18);
 }
 
 /* Адаптивность для планшетов */
@@ -232,4 +277,494 @@ h1 {
     main {
         padding: 20px 15px;
     }
+}
+
+/* Блоки с закруглёнными углами */
+.blocks-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.block-item {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 30px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.block-item-simple {
+    background: linear-gradient(145deg, rgba(28, 255, 39, 0.05), rgba(28, 128, 255, 0.05));
+    border-radius: 20px;
+    padding: 30px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px dashed rgba(28, 255, 39, 0.3);
+    position: relative;
+}
+
+.block-item-simple:hover {
+    background: linear-gradient(145deg, rgba(28, 255, 39, 0.1), rgba(28, 128, 255, 0.1));
+    border: 2px solid rgba(28, 255, 39, 0.5);
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(28, 255, 39, 0.15);
+}
+
+.block-item-simple::after {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%) translateX(0);
+    font-size: 32px;
+    color: #1cff27;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.block-item-simple:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(10px);
+}
+
+.simple-text {
+    font-size: 36px;
+    font-weight: 700;
+    color: #1cff27;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+
+
+.block-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(109, 69, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.block-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #5a9cff;
+}
+
+.block-content {
+    font-size: 18px;
+    line-height: 1.6;
+    flex-grow: 1;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Цветовые акценты для блоков */
+.block-item:nth-child(1) .block-title { color: #FF6B6B; }
+.block-item:nth-child(2) .block-title { color: #4ECDC4; }
+.block-item:nth-child(3) .block-title { color: #FFD166; }
+.block-item:nth-child(4) .block-title { color: #06D6A0; }
+.block-item:nth-child(5) .block-title { color: #9D4EDD; }
+
+/* Адаптивность для блоков */
+@media (max-width: 992px) {
+    .blocks-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .blocks-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .block-item {
+        padding: 25px;
+        min-height: 220px;
+    }
+
+    .block-title {
+        font-size: 22px;
+    }
+
+    .block-content {
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 480px) {
+    .blocks-container {
+        gap: 15px;
+    }
+
+    .block-item {
+        padding: 20px;
+        min-height: 200px;
+    }
+
+    .block-title {
+        font-size: 20px;
+    }
+
+    .block-content {
+        font-size: 16px;
+    }
+}
+
+/* ===== Страница "Все курсы" (горизонтальные большие плитки) ===== */
+.course-list{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin: 26px 0 40px;
+}
+
+.course-card{
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 22px;
+    position: relative;
+    padding: 28px 28px 22px;
+    border-radius: 22px;
+    text-decoration: none;
+    color: inherit;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    overflow: hidden;
+}
+
+.course-card:hover{
+    transform: translateY(-4px);
+    background-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 18px 38px rgba(0,0,0,0.25);
+    border-color: rgba(125, 211, 255, 0.18);
+}
+
+.course-card__left{
+    min-width: 0;
+}
+
+.course-card__badge{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: rgba(90, 156, 255, 0.12);
+    border: 1px solid rgba(90, 156, 255, 0.25);
+    color: rgba(255,255,255,0.92);
+    margin-bottom: 12px;
+}
+
+.course-card__title{
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.15;
+    margin-bottom: 10px;
+}
+
+.course-card__meta{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.78);
+    margin-bottom: 12px;
+}
+
+.course-card__dot{
+    opacity: 0.65;
+}
+
+.course-card__desc{
+    font-size: 18px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.90);
+    max-width: 820px;
+}
+
+.course-card__right{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.course-card__stats{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.10);
+}
+
+.course-card__stat-label{
+    font-size: 13px;
+    color: rgba(255,255,255,0.70);
+    margin-bottom: 6px;
+}
+
+.course-card__stat-value{
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.92);
+}
+
+/* Полоска прогресса снизу плитки */
+.course-card__progress{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 8px;
+    background: rgba(255,255,255,0.10);
+}
+
+.course-card__progress-bar{
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #7dd3ff, #a78bfa, #22c55e);
+}
+
+/* Адаптивность */
+@media (max-width: 992px){
+    .course-card{
+        grid-template-columns: 1fr;
+        padding: 24px 22px 20px;
+    }
+    .course-card__right{
+        justify-content: flex-start;
+    }
+    .course-card__stats{
+        grid-template-columns: 1fr 1fr;
+        max-width: 520px;
+    }
+}
+
+@media (max-width: 600px){
+    .course-card__title{
+        font-size: 22px;
+    }
+    .course-card__desc{
+        font-size: 16px;
+    }
+    .course-card__stats{
+        grid-template-columns: 1fr;
+    }
+}
+
+.course-card__desc{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
+.course-card__desc .chip{
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(90,156,255,0.10);
+  border: 1px solid rgba(90,156,255,0.22);
+  color: rgba(255,255,255,0.92);
+}
+.course-card__desc .chip:hover{
+  background: rgba(125,211,255,0.14);
+  border-color: rgba(125,211,255,0.28);
+}
+
+/* Базовый "премиум" вид бейджа */
+.course-card__badge{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 7px 14px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.92);
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.18),
+    0 0 0 1px rgba(255,255,255,.06) inset;
+  backdrop-filter: blur(10px);
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.course-card__badge::before{
+  content:"";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 16px rgba(255,255,255,0.12);
+  opacity: .95;
+}
+
+.course-card:hover .course-card__badge{
+  transform: translateY(-1px);
+  box-shadow:
+    0 14px 34px rgba(0,0,0,.22),
+    0 0 26px rgba(255,255,255,.08);
+}
+
+/* Цвета по классам */
+.course-card__badge.badge--backend { color:#22c55e; background:linear-gradient(90deg, rgba(34,197,94,.18),  rgba(34,197,94,.08));  border-color:rgba(34,197,94,.28);  }
+.course-card__badge.badge--base    { color: #ff6b6b; background: linear-gradient(90deg, rgba(255,107,107,.18), rgba(255,107,107,.08));  border-color: rgba(255,107,107,.28); }
+.course-card__badge.badge--adv     { color:#a78bfa; background:linear-gradient(90deg, rgba(167,139,250,.20), rgba(167,139,250,.08)); border-color:rgba(167,139,250,.30); }
+.course-card__badge.badge--python  { color:#fbbf24; background:linear-gradient(90deg, rgba(251,191,36,.22),  rgba(251,191,36,.08));  border-color:rgba(251,191,36,.30); }
+.course-card__badge.badge--data    { color:#22d3ee; background:linear-gradient(90deg, rgba(34,211,238,.20), rgba(34,211,238,.08)); border-color:rgba(34,211,238,.30); }
+
+/* Статы: только обводка (без отдельной темной плашки) */
+.course-card__stats{
+  background: transparent;              /* убираем заливку */
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 0 0 1px rgba(125,211,255,0.06) inset;
+}
+
+/* при наведении на карточку — чуть заметнее */
+.course-card:hover .course-card__stats{
+  border-color: rgba(125,211,255,0.20);
+  box-shadow:
+    0 0 0 1px rgba(125,211,255,0.10) inset,
+    0 12px 28px rgba(0,0,0,0.16);
+}
+
+/* без "квадратов" у внутренних блоков */
+.course-card__stat{
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+/* Только у активного пункта есть полоска */
+.menu-item-active a{
+  position: relative;
+}
+
+/* Базовая "тонкая" полоска, центрируем её */
+.menu-item-active a::after{
+  content: '';
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);              /* чуть ниже текста */
+  width: 100%;
+  height: 3px;                        /* базовая толщина */
+  border-radius: 999px;
+
+background: rgba(45,212,191,0.40);  /* важное: центр полоски и симметричный рост */
+  transform-origin: center;
+  transform: translateY(-50%) scaleY(0.55);
+  transition: transform .18s ease, background-color .18s ease;
+}
+
+/* На hover у активного — расширяем вверх/вниз (scaleY) */
+.menu-item-active a:hover::after{
+background: rgba(45,212,191,0.65);
+  transform: translateY(-50%) scaleY(1.35);
+}
+
+/* ===== Кнопка "Добавить" на карточках ===== */
+.course-card__add{
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  z-index: 3;
+
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(26,79,179,0.75);
+  color: rgba(255,255,255,0.95);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .02em;
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+  transition: transform .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.course-card__add:hover{
+  transform: translateY(-1px);
+  background: rgba(42,95,208,0.85);
+  border-color: rgba(125,211,255,0.22);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.22);
+}
+
+.course-card__add:active{
+  transform: translateY(0px) scale(0.98);
+}
+
+.course-card__add--active{
+  background: rgba(34,197,94,0.28);
+  border-color: rgba(34,197,94,0.40);
+}
+
+/* Tooltip */
+.course-card__add::after{
+  content: attr(data-tooltip);
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 10px);
+
+  white-space: nowrap;
+  padding: 8px 10px;
+  border-radius: 10px;
+
+  background: rgba(0,0,0,0.85);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.92);
+  font-size: 12px;
+  font-weight: 600;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity .14s ease, transform .14s ease;
+}
+
+.course-card__add::before{
+  content: "";
+  position: absolute;
+  right: 18px;
+  bottom: calc(100% + 4px);
+  width: 10px;
+  height: 10px;
+  transform: rotate(45deg) translateY(6px);
+  background: rgba(0,0,0,0.85);
+  border-left: 1px solid rgba(255,255,255,0.14);
+  border-top: 1px solid rgba(255,255,255,0.14);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .14s ease, transform .14s ease;
+}
+
+.course-card__add:hover::after,
+.course-card__add:hover::before{
+  opacity: 1;
+  transform: translateY(0);
 }

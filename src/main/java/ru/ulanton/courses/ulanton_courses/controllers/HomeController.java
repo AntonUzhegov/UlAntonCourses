@@ -13,11 +13,16 @@ public class HomeController {
     public String home(Model model) {
         model.addAttribute("appName", "UlAntonCourses");
         model.addAttribute("now", LocalDateTime.now());
-        return "home"; // templates/home.html
+        return "hello"; // templates/home.html
     }
 
-    @GetMapping("/courses")
+    @GetMapping("/c")
     public String courses() {
-        return "courses";
+        return "allCourses";
+    }
+
+    @GetMapping("/a")
+    public String about() {
+        return "about";
     }
 }

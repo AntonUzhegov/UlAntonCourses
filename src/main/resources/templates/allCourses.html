@@ -1,12 +1,201 @@
-<!doctype html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Курсы</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Ulton - Все курсы</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon"/>
 </head>
-<body style="font-family: Arial, sans-serif; padding: 30px;">
-<h1>Курсы</h1>
-<p>Здесь позже будет список курсов из базы данных.</p>
-<p><a href="/">← На главную</a></p>
-</body>
+<body>
+<header>
+    <nav>
+        <ul class="left-menu">
+            <li class="menu-item menu-item-active"><a href="#">Каталог курсов</a></li>
+            <li class="menu-item"><a href="#">Контакты</a></li>
+            <li class="menu-item"><a href="#">О нас</a></li>
+        </ul>
+    </nav>
+    <div class="logo">Ul<span class="logo-accent">ton</span></div> <nav>
+    <ul class="right-menu">
+        <li class="menu-item login-btn"><a href="#">Войти</a></li>
+    </ul>
+</nav>
+</header>
+<main>
+    <div class="content-container">
+        <h1>Каталог <span class="it-accent">курсов</span></h1>
+        <div class="course-list">
+            <!-- Карточка курса -->
+            <a aria-label="Открыть курс Java Spring" class="course-card" href="#">
+                <div class="course-card__left">
+                    <div class="course-card__badge">Backend</div>
+                    <div class="course-card__title">Spring FrameWork</div>
+                    <div class="course-card__meta">
+                        <span class="course-card__meta-item">48 часов</span>
+                        <span class="course-card__dot">•</span>
+                        <span class="course-card__meta-item">20 уроков</span>
+                    </div>
+                    <div class="course-card__desc">
+                        <span class="chip">Spring Boot</span>
+                        <span class="chip">Spring MVC</span>
+                        <span class="chip">Spring Core</span>
+                        <span class="chip">Spring Security</span>
+                        <span class="chip">Spring Data JPA</span>
+                    </div>
+                </div>
+                <div class="course-card__right">
+                    <div class="course-card__stats">
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Сложность</div>
+                            <div class="course-card__stat-value">Высокая</div>
+                        </div>
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Доступно</div>
+                            <div class="course-card__stat-value">Позже</div>
+                        </div>
+                    </div>
+                </div>
+                <button aria-label="Добавить в мои курсы" class="course-card__add" data-tooltip="добавить в мои курсы" type="button">Добавить</button></a>
+            <a aria-label="Открыть курс Java для начинающих" class="course-card" href="#">
+                <div class="course-card__left">
+                    <div class="course-card__badge">Base</div>
+                    <div class="course-card__title">Java для начинающих</div>
+                    <div class="course-card__meta">
+                        <span class="course-card__meta-item">8 недель</span>
+                        <span class="course-card__dot">•</span>
+                        <span class="course-card__meta-item">28 уроков</span>
+                        <span class="course-card__dot">•</span>
+                    </div>
+                    <div class="course-card__desc">
+                        Синтаксис, ООП, коллекции, исключения и основы алгоритмов. Идеальный старт для тех, кто никогда не программировал.
+                    </div>
+                </div>
+                <div class="course-card__right">
+                    <div class="course-card__stats">
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Сложность</div>
+                            <div class="course-card__stat-value">Лёгкая</div>
+                        </div>
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Доступно</div>
+                            <div class="course-card__stat-value">Позже</div>
+                        </div>
+                    </div>
+                </div>
+                <button aria-label="Добавить в мои курсы" class="course-card__add" data-tooltip="добавить в мои курсы" type="button">Добавить</button></a>
+            <a aria-label="Открыть курс Java для продвинутых" class="course-card" href="#">
+                <div class="course-card__left">
+                    <div class="course-card__badge">Advanced</div>
+                    <div class="course-card__title">Java для продвинутых</div>
+                    <div class="course-card__meta">
+                        <span class="course-card__meta-item">10 недель</span>
+                        <span class="course-card__dot">•</span>
+                        <span class="course-card__meta-item">34 урока</span>
+                        <span class="course-card__dot">•</span>
+                        <span class="course-card__meta-item">Кейсы: 5</span>
+                    </div>
+                    <div class="course-card__desc">
+                        Многопоточность, паттерны, JVM, профилирование и оптимизация. Для тех, кто уже пишет на Java и хочет выйти на новый уровень.
+                    </div>
+                </div>
+                <div class="course-card__right">
+                    <div class="course-card__stats">
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Сложность</div>
+                            <div class="course-card__stat-value">Высокая</div>
+                        </div>
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Досутпно</div>
+                            <div class="course-card__stat-value">Позже</div>
+                        </div>
+                    </div>
+                </div>
+                <button aria-label="Добавить в мои курсы" class="course-card__add" data-tooltip="добавить в мои курсы" type="button">Добавить</button></a>
+            <a aria-label="Открыть курс Python для продвинутых" class="course-card" href="#">
+                <div class="course-card__left">
+                    <div class="course-card__badge">Python</div>
+                    <div class="course-card__title">Python для продвинутых</div>
+                    <div class="course-card__meta">
+                        <span class="course-card__meta-item">9 недель</span>
+                        <span class="course-card__dot">•</span>
+                        <span class="course-card__meta-item">30 уроков</span>
+                        <span class="course-card__dot">•</span>
+                        <span class="course-card__meta-item">Проекты: 2</span>
+                    </div>
+                    <div class="course-card__desc">
+                        Django/Flask, асинхронность, тестирование, работа с API и основы ML. Курс для усиления скилла и портфолио.
+                    </div>
+                </div>
+                <div class="course-card__right">
+                    <div class="course-card__stats">
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Сложность</div>
+                            <div class="course-card__stat-value">Средняя+</div>
+                        </div>
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Доступно</div>
+                            <div class="course-card__stat-value">Позже</div>
+                        </div>
+                    </div>
+                </div>
+                <button aria-label="Добавить в мои курсы" class="course-card__add" data-tooltip="добавить в мои курсы" type="button">Добавить</button></a>
+            <a aria-label="Открыть курс SQL и базы данных" class="course-card" href="#">
+                <div class="course-card__left">
+                    <div class="course-card__badge">Data</div>
+                    <div class="course-card__title">SQL и базы данных</div>
+                    <div class="course-card__meta">
+                        <span class="course-card__meta-item">6 недель</span>
+                        <span class="course-card__dot">•</span>
+                        <span class="course-card__meta-item">22 урока</span>
+                        <span class="course-card__dot">•</span>
+                        <span class="course-card__meta-item">Тренажёр</span>
+                    </div>
+                    <div class="course-card__desc">
+                        SELECT'ы, JOIN'ы, индексы, транзакции и проектирование схем. Практика на реальных задачах и датасетах.
+                    </div>
+                </div>
+                <div class="course-card__right">
+                    <div class="course-card__stats">
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Сложность</div>
+                            <div class="course-card__stat-value">Средняя</div>
+                        </div>
+                        <div class="course-card__stat">
+                            <div class="course-card__stat-label">Доступно</div>
+                            <div class="course-card__stat-value">Позже</div>
+                        </div>
+                    </div>
+                </div>
+                <button aria-label="Добавить в мои курсы" class="course-card__add" data-tooltip="добавить в мои курсы" type="button">Добавить</button></a>
+        </div>
+    </div>
+</main>
+<script>
+    document.querySelectorAll('.course-card__badge').forEach(badge => {
+      const t = badge.textContent.trim().toLowerCase();
+
+      badge.classList.remove('badge--backend','badge--base','badge--adv','badge--python','badge--data');
+
+      if (t === 'backend') badge.classList.add('badge--backend');
+      else if (t === 'base') badge.classList.add('badge--base');
+      else if (t === 'advanced') badge.classList.add('badge--adv');
+      else if (t === 'python') badge.classList.add('badge--python');
+      else if (t === 'data') badge.classList.add('badge--data');
+    });
+</script>
+<script>// Кнопка "Добавить" внутри кликабельной карточки-ссылки: не даём ей открывать курс
+document.querySelectorAll('.course-card__add').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // TODO: тут можно вызвать ваш API/логику добавления курса
+    btn.classList.toggle('course-card__add--active');
+    btn.textContent = btn.classList.contains('course-card__add--active') ? 'Добавлено' : 'Добавить';
+  });
+});</script></body>
 </html>
