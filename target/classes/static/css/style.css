@@ -1,0 +1,235 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #0d1424;
+    color: white;
+    min-height: 100vh;
+}
+
+/* Шапка - без разделителя, того же цвета что и тело */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 40px;
+    background-color: #0d1424;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: 1px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Левые пункты меню */
+.left-menu {
+    display: flex;
+    gap: 30px;
+    list-style-type: none;
+}
+
+/* Правые пункты меню */
+.right-menu {
+    display: flex;
+    list-style-type: none;
+}
+
+.menu-item a {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    transition: color 0.3s ease;
+    padding: 8px 0;
+    display: block;
+}
+
+.menu-item a:hover {
+    color: #5a9cff;
+}
+
+/* Класс для активного элемента меню */
+.menu-item-active a {
+    /* font-weight: 800 !important; */
+    color: #ffffff;
+    position: relative;
+}
+
+/* Псевдоэлемент для подчёркивания */
+.menu-item-active a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ffffff;
+    transform: scaleX(1);
+    transition: transform 0.3s ease;
+}
+
+/* Кнопка Войти */
+.login-btn {
+    background-color: #1a4fb3;
+    padding: 8px 20px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #2a5fd0;
+}
+
+.login-btn a:hover {
+    color: white;
+}
+
+/* Основное содержимое - выровнено по левому краю с отступом */
+main {
+    padding: 40px;
+    background-color: #0d1424;
+    font-size: 26px;
+    min-height: calc(100vh - 90px);
+}
+
+
+
+
+/* Контейнер для содержимого с отступом слева */
+.content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Для широких экранов - отступ слева */
+@media (min-width: 1200px) {
+    .content-container {
+        margin-left: 40px;
+        margin-right: auto;
+    }
+}
+
+/* Для очень широких экранов - больше отступ */
+@media (min-width: 1600px) {
+    .content-container {
+        margin-left: 80px;
+    }
+}
+
+/* Для средних экранов - центрируем контент */
+@media (max-width: 1199px) {
+    .content-container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+h1 {
+    font-size: 68px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Адаптивность - для средних экранов */
+@media (max-width: 1100px) {
+    header {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .logo {
+        position: static;
+        transform: none;
+        order: -1;
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 32px;
+    }
+
+    .left-menu, .right-menu {
+        order: 1;
+        justify-content: center;
+        width: auto;
+        margin: 0 10px;
+    }
+
+    .right-menu {
+        margin-left: 30px;
+    }
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 768px) {
+    .left-menu, .right-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin: 0;
+    }
+
+    .right-menu {
+        margin-top: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo {
+        margin-bottom: 15px;
+    }
+
+    main {
+        padding: 30px 20px;
+    }
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 600px) {
+    .left-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .right-menu {
+        margin-top: 15px;
+    }
+
+    main {
+        min-height: calc(100vh - 160px);
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    main {
+        padding: 20px 15px;
+    }
+}
