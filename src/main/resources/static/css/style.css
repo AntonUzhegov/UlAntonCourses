@@ -711,7 +711,7 @@ h1{
   height: 3px;                        /* базовая толщина */
   border-radius: 999px;
 
-background: rgba(255,255,255,0.55);  /* важное: центр полоски и симметричный рост */
+background: rgba(45,212,191,0.40);  /* важное: центр полоски и симметричный рост */
   transform-origin: center;
   transform: translateY(-50%) scaleY(0.55);
   transition: transform .18s ease, background-color .18s ease;
@@ -719,7 +719,7 @@ background: rgba(255,255,255,0.55);  /* важное: центр полоски 
 
 /* На hover у активного — расширяем вверх/вниз (scaleY) */
 .menu-item-active a:hover::after{
-background: rgba(255,255,255,0.95);
+background: rgba(45,212,191,0.65);
   transform: translateY(-50%) scaleY(1.35);
 }
 
@@ -807,12 +807,27 @@ background: rgba(255,255,255,0.95);
   transform: translateY(0);
 }
 
-/* Меню слева: текст всегда белый */
-.left-menu .menu-item a,
-.left-menu .menu-item a:visited,
-.left-menu .menu-item a:hover,
-.left-menu .menu-item a:active,
-.left-menu .menu-item a:focus {
-  color: #fff !important;
-  text-decoration: none;
+/* === Smooth moving underline (single element) === */
+.left-menu { position: relative; }
+
+.left-menu .menu-underline{
+  position: absolute;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.95);
+  bottom: -6px;
+  left: 0;
+
+  width: 0;                 /* set by JS */
+  transform: translateX(0);
+  transition: transform .22s ease, width .22s ease, height .12s ease;
+}
+
+.left-menu .menu-underline.no-anim{
+  transition: none !important;
+}
+
+/* Disable old underline if present */
+.left-menu .menu-item-active a::after{
+  display: none !important;
 }

@@ -19,8 +19,10 @@
         <ul class="left-menu">
             <li class="menu-item"><a href="/hello">Главная</a></li>
             <li class="menu-item"><a href="/allCourses">Каталог курсов</a></li>
-            <li class="menu-item"><a th:href="@{/contacts}">Контакты</a></li>
-            <li class="menu-item menu-item-active"><a th:href="@{/about}">О нас</a></li>
+            <li class="menu-item"><a href="#">Контакты</a></li>
+            <li class="menu-item menu-item-active"><a href="#">О нас</a></li>
+
+            <span class="menu-underline no-anim" aria-hidden="true"></span>
         </ul>
     </nav>
 
@@ -458,6 +460,44 @@
       .cta__card{ flex-direction: column; align-items: flex-start; }
     }
 </style>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menu = document.querySelector('.left-menu');
+      if (!menu) return;
+
+      const underline = menu.querySelector('.menu-underline');
+      if (!underline) return;
+
+      const links = Array.from(menu.querySelectorAll('.menu-item a'));
+      const activeLink = menu.querySelector('.menu-item-active a') || links[0];
+
+      function moveTo(link){
+        const r = link.getBoundingClientRect();
+        const mr = menu.getBoundingClientRect();
+        underline.style.width = r.width + 'px';
+        underline.style.transform = `translateX(${r.left - mr.left}px)`;
+      }
+
+      // Place instantly under active (no animation)
+      underline.classList.add('no-anim');
+      if (activeLink) moveTo(activeLink);
+
+      // Enable animation after first paint
+      requestAnimationFrame(() => {
+        underline.classList.remove('no-anim');
+      });
+
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => moveTo(link));
+        link.addEventListener('focus', () => moveTo(link));
+      });
+
+      menu.addEventListener('mouseleave', () => activeLink && moveTo(activeLink));
+      window.addEventListener('resize', () => activeLink && moveTo(activeLink));
+    });
+</script>
 
 </body>
 </html>
