@@ -1,87 +1,91 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ulanton - Главная</title>
+    <title>Ulton - Главная</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-    <nav>
-        <ul class="left-menu">
-            <li class="menu-item"><a href="#">Каталог курсов</a></li>
-            <li class="menu-item"><a href="#">Контакты</a></li>
-            <li class="menu-item"><a href="#">О нас</a></li>
-        </ul>
-    </nav>
-    <div class="logo">Ul<span class="logo-accent">ton</span></div>    <nav>
-        <ul class="right-menu">
-            <li class="menu-item login-btn"><a href="#">Войти</a></li>
-        </ul>
-    </nav>
-</header>
-
-<main>
-    <div class="content-container">
-        <h1>Ваш лучший <span class="it-accent">путь в IT</span></h1>
-        <!-- 6 блоков с закруглёнными углами (2 строки по 3 блока) -->
-        <div class="blocks-container">
-            <!-- Первая строка -->
-            <div class="block-item">
-                <div class="block-title">Java Spring</div>
-                <div class="block-content">
-                    Современный фреймворк для создания enterprise-приложений на Java. Изучите Spring Boot, Security, Data и другие модули.
+    <header>
+        <nav>
+            <ul class="left-menu">
+                <li class="menu-item"><a href="#">Каталог курсов</a></li>
+                <li class="menu-item"><a href="#">Контакты</a></li>
+                <li class="menu-item"><a href="#">О нас</a></li>
+            </ul>
+        </nav>
+        <div class="logo">Ulton</div>
+        <nav>
+            <ul class="right-menu">
+                <li class="menu-item login-btn"><a href="#">Войти</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="content-container">
+            </br>
+            </br>
+            <h1>Ваш лучший <span style="color:rgb(132, 192, 248)">путь в IT</span></h1>
+            
+            <!-- 6 блоков с закруглёнными углами (2 строки по 3 блока) -->
+            <div class="blocks-container">
+                <!-- Первая строка -->
+                <div class="block-item">
+                    <div class="block-title">Java Spring</div>
+                    <div class="block-content">
+                        Современный фреймворк для создания enterprise-приложений на Java. Изучите Spring Boot, Security, Data и другие модули.
+                    </div>
                 </div>
-            </div>
-
-            <div class="block-item">
-                <div class="block-title">Java для начинающих</div>
-                <div class="block-content">
-                    Основы программирования на Java: синтаксис, ООП, коллекции, исключения. Идеальный старт для новичков в разработке.
+                
+                <div class="block-item">
+                    <div class="block-title">Java для начинающих</div>
+                    <div class="block-content">
+                        Основы программирования на Java: синтаксис, ООП, коллекции, исключения. Идеальный старт для новичков в разработке.
+                    </div>
                 </div>
-            </div>
-
-            <div class="block-item">
-                <div class="block-title">Java для продвинутых</div>
-                <div class="block-content">
-                    Продвинутые темы: многопоточность, паттерны проектирования, оптимизация производительности, работа с памятью.
+                
+                <div class="block-item">
+                    <div class="block-title">Java для продвинутых</div>
+                    <div class="block-content">
+                        Продвинутые темы: многопоточность, паттерны проектирования, оптимизация производительности, работа с памятью.
+                    </div>
                 </div>
-            </div>
-
-            <!-- Вторая строка -->
-            <!-- <div class="block-item">
-                <div class="block-title">Python для начинающих</div>
-                <div class="block-content">
-                    Изучите Python с нуля: основы синтаксиса, структуры данных, функции, модули. Самый популярный язык для старта в IT.
+                
+                <!-- Вторая строка -->
+                <!-- <div class="block-item">
+                    <div class="block-title">Python для начинающих</div>
+                    <div class="block-content">
+                        Изучите Python с нуля: основы синтаксиса, структуры данных, функции, модули. Самый популярный язык для старта в IT.
+                    </div>
+                </div> -->
+                
+                <div class="block-item">
+                    <div class="block-title">Python для продвинутых</div>
+                    <div class="block-content">
+                        Веб-разработка на Django/Flask, анализ данных, машинное обучение, асинхронное программирование, оптимизация кода.
+                    </div>
                 </div>
-            </div> -->
 
-            <div class="block-item">
-                <div class="block-title">Python для продвинутых</div>
-                <div class="block-content">
-                    Веб-разработка на Django/Flask, анализ данных, машинное обучение, асинхронное программирование, оптимизация кода.
+
+                <div class="block-item">
+                    <div class="block-title">SQL и базы данных</div>
+                    <div class="block-content">
+                        Работа с реляционными базами данных: сложные запросы, оптимизация, транзакции, проектирование схем данных.
+                    </div>
                 </div>
-            </div>
 
-
-            <div class="block-item">
-                <div class="block-title">SQL и базы данных</div>
-                <div class="block-content">
-                    Работа с реляционными базами данных: сложные запросы, оптимизация, транзакции, проектирование схем данных.
+                <div class="block-item-simple">
+                    <div class="simple-text">Начать учиться</div>
                 </div>
+                
             </div>
-
-            <div class="block-item-simple">
-                <div class="simple-text">Начать учиться</div>
-            </div>
-
+            
         </div>
-
-    </div>
-</main>
+    </main>
 </body>
 </html>
