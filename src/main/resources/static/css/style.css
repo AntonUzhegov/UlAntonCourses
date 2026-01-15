@@ -833,3 +833,119 @@ background: rgba(45,212,191,0.65);
 .left-menu .menu-item-active a::after{
   display: none !important;
 }
+
+/* Левый блок: список уроков со скроллом */
+.lesson-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  /* высота и скролл */
+  max-height: 520px;      /* подгони под себя */
+  overflow-y: auto;
+  padding-right: 6px;     /* чтобы скролл не наезжал на контент */
+}
+
+/* элементы */
+.lesson-item {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.88);
+  text-decoration: none;
+}
+
+.lesson-item--active {
+  background: rgba(125,211,255,0.14);
+  border: 1px solid rgba(125,211,255,0.25);
+  color: rgba(255,255,255,0.95);
+}
+
+/* ===== Lesson layout ===== */
+.lesson {
+  margin-top: 12px;
+}
+
+.lesson-header {
+  margin-bottom: 14px;
+}
+
+.lesson-title {
+  font-size: 22px;
+  margin: 0 0 6px;
+  letter-spacing: 0.2px;
+}
+
+.lesson-subtitle {
+  margin: 0;
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
+/* ===== Content typography ===== */
+.lesson-content {
+  font-size: 16px;
+  line-height: 1.75;
+  opacity: 0.95;
+}
+
+.lesson-content h3 {
+  margin: 18px 0 10px;
+  font-size: 17px;
+}
+
+.lesson-content p {
+  margin: 10px 0;
+}
+
+.lesson-content ul,
+.lesson-content ol {
+  margin: 10px 0 10px 22px;
+}
+
+.lesson-content li {
+  margin: 6px 0;
+}
+
+.lesson-content code {
+  padding: 2px 6px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.10);
+  font-size: 0.95em;
+}
+
+/* ===== Code block ===== */
+.code-block {
+  margin: 14px 0;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.10);
+  overflow: auto;
+}
+
+.code-block code {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre;
+  display: block;
+}
+
+/* ===== Note block ===== */
+.note {
+  margin: 14px 0 0;
+  padding: 12px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.note strong {
+  opacity: 0.95;
+}

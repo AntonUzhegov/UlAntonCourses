@@ -31,3 +31,15 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Игнорируем логи
+*.log
+
+# Игнорируем базы данных (НЕ храним!)
+*.db
+*.sqlite
+data/
+
+# Игнорируем Docker данные (но сам compose храним!)
+docker-data/
+!docker-compose.yml

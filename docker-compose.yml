@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine  # версия PostgreSQL
+    container_name: Ulton-db    # имя контейнера
+    environment:
+      POSTGRES_DB: UlAntonCourses     # имя базы данных
+      POSTGRES_USER: antonuzhegov       # логин
+      POSTGRES_PASSWORD: 0387   # пароль
+    ports:
+      - "5433:5432"                # порт для подключения
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # сохраняем данные
+
+volumes:
+  postgres_data:  # чтобы данные не пропадали при перезапуске

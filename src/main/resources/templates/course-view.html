@@ -1,10 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${course.title}">Курс</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 
+<header>
+    <nav>
+        <ul class="left-menu">
+            <li class="menu-item"><a th:href="@{/}">Главная</a></li>
+            <li class="menu-item menu-item-active"><a th:href="@{/allCourses}">Каталог курсов</a></li>
+            <li class="menu-item"><a th:href="@{/about}">О нас</a></li>
+            <span class="menu-underline no-anim" aria-hidden="true"></span>
+        </ul>
+    </nav>
+    <div class="logo">Ul<span class="logo-accent">ton</span></div>
+    <nav>
+        <ul class="right-menu">
+            <li class="menu-item login-btn"><a th:href="@{/login}">Войти</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="content-container">
+        <h1 th:text="${course.title}">Title</h1>
+
+        <div style="display:grid; grid-template-columns: 360px 1fr; gap: 22px; margin-top: 18px;">
+            <!-- ЛЕВАЯ КОЛОНКА: список уроков -->
+            <aside style="background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10); border-radius: 18px; padding: 16px;">
+                <div style="display:flex; gap:10px; align-items:center; margin-bottom: 10px;">
+                    <div class="course-card__badge" th:text="${course.badge}">Base</div>
+                    <div style="opacity:.85" th:text="${course.difficulty}">Лёгкая</div>
+                </div>
+
+                <div style="opacity:.85; font-size: 16px; line-height:1.5; margin-bottom: 12px;"
+                     th:text="${course.shortDescription}">
+                    Описание курса...
+                </div>
+
+                <div style="margin-top: 14px; font-size: 16px; opacity:.9; font-weight: 700;">
+                    Уроки
+                </div>
+
+                <div class="lesson-list"><a th:each="l : ${course.lessons}"
+                                            th:href="@{/courses/{slug}(slug=${course.slug}, lesson=${l.position})}"
+                                            th:text="${l.position + '. ' + l.title}"
+                                            class="lesson-item"
+                                            th:classappend="${l.position == activeLessonPos} ? ' lesson-item--active' : ''"
+                                            th:attr="data-lesson-pos=${l.position}">
+                </a>
+                </div>
+            </aside>
+
+            <!-- ПРАВАЯ КОЛОНКА: контент урока -->
+            <section style="background: rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.10); border-radius: 18px; padding: 18px;">
+                <div th:if="${lesson == null}" style="opacity:.9;">
+                    Урок не найден.
+                </div>
+
+                <div th:if="${lesson != null}">
+                    <h2 style="margin-bottom: 12px;" th:text="${lesson.position + '. ' + lesson.title}">
+                        1. Название урока
+                    </h2>
+
+                    <!-- Если ты будешь хранить content как простой текст -->
+                    <article class="lesson-content" th:utext="${lesson.content}">
+                        Контент урока
+                    </article>
+
+                    <!-- Если позже захочешь хранить HTML — тогда используй th:utext -->
+                    <!-- <div th:utext="${lesson.content}"></div> -->
+                </div>
+            </section>
+        </div>
+
+    </div>
+</main>
+
+<script>
+    // Подчёркивание меню как в других страницах (у тебя уже есть похожий скрипт в allCourses) :contentReference[oaicite:8]{index=8}
+    document.addEventListener('DOMContentLoaded', () => {
+      const menu = document.querySelector('.left-menu');
+      if (!menu) return;
+      const underline = menu.querySelector('.menu-underline');
+      if (!underline) return;
+
+      const links = Array.from(menu.querySelectorAll('.menu-item a'));
+      const activeLink = menu.querySelector('.menu-item-active a') || links[0];
+
+      function moveTo(link){
+        const r = link.getBoundingClientRect();
+        const mr = menu.getBoundingClientRect();
+        underline.style.width = r.width + 'px';
+        underline.style.transform = `translateX(${r.left - mr.left}px)`;
+      }
+
+      underline.classList.add('no-anim');
+      if (activeLink) moveTo(activeLink);
+      requestAnimationFrame(() => underline.classList.remove('no-anim'));
+
+      links.forEach(link => {
+        link.addEventListener('mouseenter', () => moveTo(link));
+        link.addEventListener('focus', () => moveTo(link));
+      });
+
+      menu.addEventListener('mouseleave', () => activeLink && moveTo(activeLink));
+      window.addEventListener('resize', () => activeLink && moveTo(activeLink));
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const list = document.querySelector('.lesson-list');
+      if (!list) return;
+
+      // Ключ уникален на курс (чтобы разные курсы не мешали друг другу)
+      const courseSlug = /*[[${course.slug}]]*/ 'course';
+      const key = `lessonListScroll:${courseSlug}`;
+
+      // 1) восстановить scrollTop
+      const saved = sessionStorage.getItem(key);
+      if (saved !== null) {
+        list.scrollTop = parseInt(saved, 10) || 0;
+      }
+
+      // 2) если активный элемент не виден, прокрутить к нему
+      const active = list.querySelector('.lesson-item--active');
+      if (active) {
+        const listRect = list.getBoundingClientRect();
+        const itemRect = active.getBoundingClientRect();
+
+        const isAbove = itemRect.top < listRect.top;
+        const isBelow = itemRect.bottom > listRect.bottom;
+
+        if (isAbove || isBelow) {
+          // scrollIntoView может прыгать, поэтому делаем мягко и предсказуемо
+          active.scrollIntoView({ block: 'nearest' });
+        }
+      }
+
+      // 3) при клике запомнить текущую позицию скролла
+      list.addEventListener('click', (e) => {
+        const link = e.target.closest('a.lesson-item');
+        if (!link) return;
+        sessionStorage.setItem(key, String(list.scrollTop));
+      });
+    });
+</script>
 </body>
 </html>

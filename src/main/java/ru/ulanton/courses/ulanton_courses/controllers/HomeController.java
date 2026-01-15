@@ -3,26 +3,33 @@ package ru.ulanton.courses.ulanton_courses.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.time.LocalDateTime;
+import ru.ulanton.courses.ulanton_courses.repositories.CourseRepository;
 
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("appName", "UlAntonCourses");
-        model.addAttribute("now", LocalDateTime.now());
-        return "hello"; // templates/home.html
+    private final CourseRepository courseRepository;
+
+    public HomeController(CourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
     }
 
+    // Главная (у тебя шаблон hello.html)
+    @GetMapping({"/", "/hello"})
+    public String hello() {
+        return "hello";
+    }
+
+    // Каталог курсов (шаблон allCourses.html)
     @GetMapping("/allCourses")
-    public String courses() {
+    public String allCourses(Model model) {
+        model.addAttribute("courses", courseRepository.findAll());
         return "allCourses";
     }
 
-    @GetMapping("/about")
-    public String about() {
-        return "about";
-    }
+//    // Если у тебя есть шаблон about.html — оставь, если нет, можешь убрать этот метод
+//    @GetMapping("/about")
+//    public String about() {
+//        return "about";
+//    }
 }
