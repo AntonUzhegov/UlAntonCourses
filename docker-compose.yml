@@ -6,7 +6,7 @@ services:
     container_name: Ulton-db    # имя контейнера
     environment:
       POSTGRES_DB: UlAntonCourses     # имя базы данных
-      POSTGRES_USER: antonuzhegov       # логин
+      POSTGRES_USER: antonuzegov       # логин
       POSTGRES_PASSWORD: 0387   # пароль
     ports:
       - "5433:5432"                # порт для подключения

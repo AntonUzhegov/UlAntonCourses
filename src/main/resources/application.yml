@@ -2,7 +2,7 @@ spring:
   # Настройки базы данных
   datasource:
     url: jdbc:postgresql://localhost:5433/UlAntonCourses
-    username: antonuzhegov
+    username: antonuzegov
     password: 0387
     driver-class-name: org.postgresql.Driver
 
