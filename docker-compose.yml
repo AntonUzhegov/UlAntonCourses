@@ -1,17 +1,26 @@
-version: '3.8'
-
 services:
-  postgres:
-    image: postgres:15-alpine  # версия PostgreSQL
-    container_name: Ulton-db    # имя контейнера
+  db:
+    image: postgres:16
     environment:
-      POSTGRES_DB: UlAntonCourses     # имя базы данных
-      POSTGRES_USER: antonuzegov       # логин
-      POSTGRES_PASSWORD: 0387   # пароль
+      POSTGRES_DB: UlAntonCourses
+      POSTGRES_USER: antonuzegov
+      POSTGRES_PASSWORD: "0387"
     ports:
-      - "5433:5432"                # порт для подключения
+      - "5433:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data  # сохраняем данные
+      - db_data:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d:ro
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/UlAntonCourses
+      SPRING_DATASOURCE_USERNAME: antonuzegov
+      SPRING_DATASOURCE_PASSWORD: "0387"
+    ports:
+      - "8083:8083"
 
 volumes:
-  postgres_data:  # чтобы данные не пропадали при перезапуске
+  db_data:
