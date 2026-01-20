@@ -8,33 +8,24 @@
     background-color: transparent;
 }
 
-/* Горизонтальный layout без разделителя */
-.auth-layout {
-    display: flex;
+/* Центрированный контейнер */
+.auth-container {
     width: 100%;
-    max-width: 1100px;
-    min-height: 550px;
+    max-width: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Карточка авторизации */
+.auth-card {
+    width: 100%;
+    padding: 50px;
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 25px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    gap: 0; /* Убрали промежуток */
-}
-
-/* Левая часть - Обычный вход */
-.auth-left {
-    flex: 1;
-    padding: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background: linear-gradient(135deg, rgba(13, 20, 36, 0.9), rgba(26, 36, 63, 0.9));
-}
-
-.auth-container {
-    width: 100%;
-    max-width: 400px;
 }
 
 .auth-title {
@@ -253,231 +244,7 @@
     min-height: 18px;
 }
 
-/* Правая часть - Альтернативные способы */
-.auth-right {
-    flex: 1;
-    padding: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, rgba(26, 36, 63, 0.9), rgba(13, 20, 36, 0.9));
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.alt-auth-container {
-    width: 100%;
-    max-width: 400px;
-}
-
-.alt-auth-title {
-    font-size: 32px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    text-align: center;
-    color: white;
-}
-
-.alt-auth-subtitle {
-    text-align: center;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 40px;
-    font-size: 16px;
-}
-
-/* Социальные кнопки */
-.social-auth {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-bottom: 40px;
-}
-
-.social-btn {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background-color: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 16px 20px;
-    color: white;
-    font-size: 15px;
-    font-weight: 500;
-    text-decoration: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.social-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transition: 0.5s;
-}
-
-.social-btn:hover::before {
-    left: 100%;
-}
-
-.social-btn:hover {
-    background-color: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-.social-icon {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.google-btn {
-    border-color: rgba(255, 107, 107, 0.3);
-}
-
-.google-btn:hover {
-    background-color: rgba(255, 107, 107, 0.1);
-    border-color: rgba(255, 107, 107, 0.5);
-}
-
-.github-btn {
-    border-color: rgba(255, 209, 102, 0.3);
-}
-
-.github-btn:hover {
-    background-color: rgba(255, 209, 102, 0.1);
-    border-color: rgba(255, 209, 102, 0.5);
-}
-
-.vk-btn {
-    border-color: rgba(90, 156, 255, 0.3);
-}
-
-.vk-btn:hover {
-    background-color: rgba(90, 156, 255, 0.1);
-    border-color: rgba(90, 156, 255, 0.5);
-}
-
-.yandex-btn {
-    border-color: rgba(255, 77, 77, 0.3);
-}
-
-.yandex-btn:hover {
-    background-color: rgba(255, 77, 77, 0.1);
-    border-color: rgba(255, 77, 77, 0.5);
-}
-
-/* Гостевой доступ */
-.guest-access {
-    text-align: center;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 15px;
-    border: 1px dashed rgba(255, 255, 255, 0.2);
-}
-
-.guest-text {
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 15px;
-    font-size: 14px;
-}
-
-.guest-btn {
-    display: inline-block;
-    padding: 10px 25px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 25px;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.guest-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-}
-
-/* Адаптивность */
-@media (max-width: 1024px) {
-    .auth-layout {
-        flex-direction: column;
-        max-width: 500px;
-    }
-
-    .auth-right {
-        border-left: none;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .auth-left,
-    .auth-right {
-        padding: 40px 30px;
-    }
-}
-
-@media (max-width: 768px) {
-    .auth-layout {
-        border-radius: 20px;
-    }
-
-    .auth-title {
-        font-size: 32px;
-        margin-bottom: 30px;
-    }
-
-    .alt-auth-title {
-        font-size: 28px;
-    }
-
-    .auth-left,
-    .auth-right {
-        padding: 30px 20px;
-    }
-
-    .auth-links {
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .auth-page main {
-        padding: 20px 15px;
-    }
-
-    .auth-layout {
-        border-radius: 15px;
-    }
-
-    .auth-title {
-        font-size: 28px;
-    }
-
-    .alt-auth-title {
-        font-size: 24px;
-    }
-
-    .social-btn {
-        padding: 14px 16px;
-        font-size: 14px;
-    }
-}
-
-/* Стили для чекбокса "Запомнить меня" - простое заполнение */
+/* Стили для чекбокса "Запомнить меня" */
 .checkbox-label {
     display: flex;
     align-items: center;
@@ -507,7 +274,7 @@
     width: 0;
 }
 
-/* Кастомный чекбокс - квадрат с заливкой */
+/* Кастомный чекбокс */
 .checkbox-custom {
     position: relative;
     display: inline-block;
@@ -520,25 +287,21 @@
     flex-shrink: 0;
 }
 
-/* Состояние когда чекбокс выбран */
 .checkbox-input:checked ~ .checkbox-custom {
     background-color: #5a9cff;
     border-color: #5a9cff;
     box-shadow: 0 0 8px rgba(90, 156, 255, 0.4);
 }
 
-/* Эффект при нажатии */
 .checkbox-label:active .checkbox-custom {
     transform: scale(0.95);
 }
 
-/* Фокус состояние */
 .checkbox-input:focus ~ .checkbox-custom {
     box-shadow: 0 0 0 2px rgba(90, 156, 255, 0.3);
     border-color: #5a9cff;
 }
 
-/* Текст чекбокса */
 .checkbox-text {
     font-weight: 500;
     letter-spacing: 0.3px;
@@ -554,59 +317,36 @@
     font-weight: 600;
 }
 
-/* Плавная анимация заливки */
-.checkbox-custom {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 0 0;
-}
-
-.checkbox-input:checked ~ .checkbox-custom {
-    background-size: 100% 100%;
-}
-
-/* Вариант с более круглыми углами (опционально) */
-.checkbox-custom.rounded {
-    border-radius: 6px;
-}
-
-/* Вариант с градиентной заливкой */
-.checkbox-input:checked ~ .checkbox-custom.gradient {
-    background: linear-gradient(135deg, #5a9cff, #2a5fd0);
-    border-color: transparent;
-}
-
-/* Анимация pulse при выборе */
-@keyframes checkboxPulse {
-    0% {
-        box-shadow: 0 0 0 0 rgba(90, 156, 255, 0.4);
+/* Адаптивность */
+@media (max-width: 768px) {
+    .auth-card {
+        padding: 40px 30px;
+        border-radius: 20px;
     }
-    70% {
-        box-shadow: 0 0 0 6px rgba(90, 156, 255, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(90, 156, 255, 0);
+
+    .auth-title {
+        font-size: 32px;
+        margin-bottom: 30px;
     }
 }
 
-.checkbox-input:checked ~ .checkbox-custom.pulse {
-    animation: checkboxPulse 0.4s ease;
-}
+@media (max-width: 480px) {
+    .auth-page main {
+        padding: 20px 15px;
+    }
 
-/* Для отключенного состояния */
-.checkbox-input:disabled ~ .checkbox-custom {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+    .auth-card {
+        padding: 30px 20px;
+        border-radius: 15px;
+    }
 
-.checkbox-input:disabled ~ .checkbox-text {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
+    .auth-title {
+        font-size: 28px;
+    }
 
-/* Невидимый заполнитель */
-.spacer {
-    width: 100%;
-    visibility: hidden;
-    pointer-events: none;
+    .auth-links {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
 }

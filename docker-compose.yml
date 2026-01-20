@@ -1,26 +1,20 @@
-services:
-  db:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: UlAntonCourses
-      POSTGRES_USER: antonuzegov
-      POSTGRES_PASSWORD: "0387"
-    ports:
-      - "5433:5432"
-    volumes:
-      - db_data:/var/lib/postgresql/data
-      - ./db/init:/docker-entrypoint-initdb.d:ro
+version: '3.8'
 
-  app:
-    build: .
-    depends_on:
-      - db
+services:
+  postgres:
+    image: postgres:15
+    container_name: spring_postgres
+    restart: always
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/UlAntonCourses
-      SPRING_DATASOURCE_USERNAME: antonuzegov
-      SPRING_DATASOURCE_PASSWORD: "0387"
+      POSTGRES_DB: CoursesDB
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: app_user_password
+      POSTGRES_INITDB_ARGS: "--auth-host=md5 --auth-local=md5"
     ports:
-      - "8083:8083"
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
-  db_data:
+  postgres_data:

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body class="auth-page">
+<header>
+    <nav>
+        <ul class="left-menu">
+            <li class="menu-item"><a th:href="@{/}">На главную</a></li>
+        </ul>
+    </nav>
+    <div class="logo">Ulton</div>
+    <nav>
+        <ul class="right-menu">
+            <!-- Оставляем пустым для симметрии -->
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1 class="auth-title">Регистрация</h1>
+
+            <!-- Сообщения об ошибках -->
+            <div th:if="${error != null}" class="alert alert-error" th:text="${error}">
+                Ошибка при регистрации
+            </div>
+
+            <form class="auth-form" th:action="@{/register}" method="post" th:object="${user}">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" th:field="*{email}" class="form-input"
+                           placeholder="example@mail.com" required>
+                    <div class="error-message" id="email-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username" class="form-label">Имя пользователя</label>
+                    <input type="text" id="username" th:field="*{username}" class="form-input"
+                           placeholder="Придумайте логин" required>
+                    <div class="error-message" id="username-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="firstName" class="form-label">Имя</label>
+                    <input type="text" id="firstName" th:field="*{firstName}" class="form-input"
+                           placeholder="Ваше имя">
+                </div>
+
+                <div class="form-group">
+                    <label for="lastName" class="form-label">Фамилия</label>
+                    <input type="text" id="lastName" th:field="*{lastName}" class="form-input"
+                           placeholder="Ваша фамилия">
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Пароль</label>
+                    <input type="password" id="password" th:field="*{password}" class="form-input"
+                           placeholder="Придумайте пароль" required>
+                    <div class="error-message" id="password-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">Подтвердите пароль</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-input"
+                           placeholder="Повторите пароль" required>
+                    <div class="error-message" id="confirm-password-error"></div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="agreeTerms" name="agreeTerms" class="checkbox-input" required>
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-text">Я согласен с <a th:href="@{/terms}">Пользовательским соглашением</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="auth-btn">
+                    <span class="btn-text">Зарегистрироваться</span>
+                    <span class="btn-loader" style="display: none;">⌛</span>
+                </button>
+            </form>
+
+            <div class="auth-links">
+                <a th:href="@{/login}" class="auth-link">Уже есть аккаунт? Войти</a>
+            </div>
+
+            <div class="auth-footer">
+                <p>Регистрируясь, вы соглашаетесь с <a th:href="@{/terms}">Пользовательским соглашением</a>
+                    и <a th:href="@{/privacy}">Политикой конфиденциальности</a></p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script th:src="@{/js/register.js}"></script>
+</body>
+</html>
