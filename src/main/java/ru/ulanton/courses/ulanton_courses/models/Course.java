@@ -1,6 +1,7 @@
 package ru.ulanton.courses.ulanton_courses.models;
 
 import jakarta.persistence.*;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -13,56 +14,74 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @Column(nullable = false, unique = true)
     private String slug;
 
+    @Setter
     @Column(nullable = false)
-    private String title; // "Java для начинающих"
+    private String title;
 
+    @Setter
     @Column(length = 2000)
     private String shortDescription;
 
-    private String badge;       // Base / Backend / Advanced / ...
-    private String difficulty;  // Лёгкая / Средняя / ...
+    @Setter
+    private String badge;
+    @Setter
+    private String difficulty;
+    @Setter
     private Integer durationWeeks;
+    @Setter
     private Integer lessonsCount;
 
-    // Можно хранить теги строкой "ООП,Коллекции,Исключения"
+    @Setter
     @Column(length = 500)
     private String tags;
 
+    @Setter
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @OrderBy("position ASC")
     private List<Lesson> lessons = new ArrayList<>();
 
-    // --- getters/setters ---
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getSlug() { return slug; }
-    public void setSlug(String slug) { this.slug = slug; }
+    public String getSlug() {
+        return slug;
+    }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public String getTitle() {
+        return title;
+    }
 
-    public String getShortDescription() { return shortDescription; }
-    public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
+    public String getShortDescription() {
+        return shortDescription;
+    }
 
-    public String getBadge() { return badge; }
-    public void setBadge(String badge) { this.badge = badge; }
+    public String getBadge() {
+        return badge;
+    }
 
-    public String getDifficulty() { return difficulty; }
-    public void setDifficulty(String difficulty) { this.difficulty = difficulty; }
+    public String getDifficulty() {
+        return difficulty;
+    }
 
-    public Integer getDurationWeeks() { return durationWeeks; }
-    public void setDurationWeeks(Integer durationWeeks) { this.durationWeeks = durationWeeks; }
+    public Integer getDurationWeeks() {
+        return durationWeeks;
+    }
 
-    public Integer getLessonsCount() { return lessonsCount; }
-    public void setLessonsCount(Integer lessonsCount) { this.lessonsCount = lessonsCount; }
+    public Integer getLessonsCount() {
+        return lessonsCount;
+    }
 
-    public String getTags() { return tags; }
-    public void setTags(String tags) { this.tags = tags; }
+    public String getTags() {
+        return tags;
+    }
 
-    public List<Lesson> getLessons() { return lessons; }
-    public void setLessons(List<Lesson> lessons) { this.lessons = lessons; }
+    public List<Lesson> getLessons() {
+        return lessons;
+    }
 
 }

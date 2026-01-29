@@ -18,7 +18,6 @@ public class MainController {
         this.courseRepository = courseRepository;
     }
 
-    // Главная страница
     @GetMapping("/")
     public String home(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -35,13 +34,11 @@ public class MainController {
         return "hello";
     }
 
-    // Страница "О нас"
     @GetMapping("/about")
     public String about() {
         return "about";
     }
 
-    // Обработка ошибок
     @GetMapping("/errors/404")
     public String error404(Model model) {
         model.addAttribute("errorMessage", "Ара, ну нима пока такой страницы, выходи");

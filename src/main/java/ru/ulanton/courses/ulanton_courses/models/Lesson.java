@@ -1,7 +1,10 @@
 package ru.ulanton.courses.ulanton_courses.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
 @Entity
 @Table(name = "lessons")
 public class Lesson {
@@ -9,30 +12,19 @@ public class Lesson {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer position; // 1..20
+    private Integer position;
 
+    @Setter
     @Column(nullable = false)
     private String title;
 
+    @Setter
     @Column(columnDefinition = "text")
-    private String content; // текст урока (можно HTML/Markdown)
+    private String content;
 
+    @Setter
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "course_id", nullable = false)
     private Course course;
 
-    // --- getters/setters ---
-    public Long getId() { return id; }
-
-    public Integer getPosition() { return position; }
-    public void setPosition(Integer position) { this.position = position; }
-
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
-
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
-
-    public Course getCourse() { return course; }
-    public void setCourse(Course course) { this.course = course; }
 }
