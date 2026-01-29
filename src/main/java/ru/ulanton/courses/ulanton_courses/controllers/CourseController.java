@@ -9,16 +9,24 @@ import ru.ulanton.courses.ulanton_courses.repositories.CourseRepository;
 import ru.ulanton.courses.ulanton_courses.repositories.LessonRepository;
 
 @Controller
-public class CourseViewController {
+public class CourseController {
 
     private final CourseRepository courseRepository;
     private final LessonRepository lessonRepository;
 
-    public CourseViewController(CourseRepository courseRepository, LessonRepository lessonRepository) {
+    public CourseController(CourseRepository courseRepository, LessonRepository lessonRepository) {
         this.courseRepository = courseRepository;
         this.lessonRepository = lessonRepository;
     }
 
+    // Каталог всех курсов
+    @GetMapping("/allCourses")
+    public String allCourses(Model model) {
+        model.addAttribute("courses", courseRepository.findAll());
+        return "allCourses";
+    }
+
+    // Просмотр конкретного курса с уроками
     @GetMapping("/courses/{slug}")
     public String courseView(@PathVariable String slug,
                              @RequestParam(name = "lesson", required = false) Integer lessonPos,
