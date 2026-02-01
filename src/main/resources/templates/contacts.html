@@ -12,7 +12,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
     <style>
-        /* Стили для страницы контактов */
+        /* Стили для страницы контактов - копируем из предыдущего ответа */
         .contacts-container {
             padding-top: 8px;
             max-width: 1200px;
@@ -265,6 +265,26 @@
             line-height: 1.5;
         }
 
+        /* Сообщения */
+        .alert {
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+
         /* Адаптивность */
         @media (max-width: 900px) {
             .contacts-grid {
@@ -328,6 +348,14 @@
             </div>
         </section>
 
+        <!-- Сообщения об успехе/ошибке -->
+        <div th:if="${success != null}" class="alert alert-success" th:text="${success}">
+            Сообщение успешно отправлено!
+        </div>
+        <div th:if="${error != null}" class="alert alert-error" th:text="${error}">
+            Ошибка при отправке сообщения.
+        </div>
+
         <div class="contacts-grid">
             <!-- Левая колонка: контактная информация -->
             <div class="contact-info">
@@ -339,21 +367,8 @@
                         <span>Email</span>
                     </div>
                     <div class="contact-card__content">
-                        <p>Основные вопросы: <a href="mailto:support@ulton.com">support@ulton.com</a></p>
-                        <p>Техподдержка: <a href="mailto:tech@ulton.com">tech@ulton.com</a></p>
-                        <p>Сотрудничество: <a href="mailto:partners@ulton.com">partners@ulton.com</a></p>
-                    </div>
-                </div>
-
-                <div class="contact-card">
-                    <div class="contact-card__title">
-                        <div class="contact-icon">📞</div>
-                        <span>Телефон</span>
-                    </div>
-                    <div class="contact-card__content">
-                        <p>Телефон для связи: <a href="tel:+78001234567">8 (800) 123-45-67</a></p>
-                        <p>WhatsApp/Telegram: <a href="https://wa.me/79991234567">+7 (999) 123-45-67</a></p>
-                        <p>Звонок по России бесплатный</p>
+                        <p>Основные вопросы: <a href="mailto:uzhegov2006@gmail.com">uzhegov2006@gmail.com</a></p>
+                        <p>Техподдержка: <a href="mailto:uzhegov2006@gmail.com">uzhegov2006@gmail.com</a></p>
                     </div>
                 </div>
 
@@ -380,18 +395,6 @@
                         <p>Воскресенье: выходной</p>
                     </div>
                 </div>
-
-                <div class="contact-card">
-                    <div class="contact-card__title">
-                        <div class="contact-icon">💬</div>
-                        <span>Социальные сети</span>
-                    </div>
-                    <div class="contact-card__content">
-                        <p>Telegram: <a href="https://t.me/ulton_official">@ulton_official</a></p>
-                        <p>VK: <a href="https://vk.com/ulton">vk.com/ulton</a></p>
-                        <p>YouTube: <a href="https://youtube.com/c/Ulton">Ulton IT Education</a></p>
-                    </div>
-                </div>
             </div>
 
             <!-- Правая колонка: форма обратной связи -->
@@ -401,35 +404,38 @@
                     Заполните форму ниже, и мы свяжемся с вами в ближайшее время
                 </p>
 
-                <form id="contactForm">
+                <form id="contactForm" th:action="@{/contacts/send}" method="post" th:object="${contactForm}">
                     <div class="form-group">
-                        <label for="name" class="form-label">Ваше имя</label>
-                        <input type="text" id="name" class="form-input" placeholder="Иван Иванов" required>
+                        <label for="name" class="form-label">Ваше имя *</label>
+                        <input type="text" id="name" th:field="*{name}" class="form-input"
+                               placeholder="Иван Иванов" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="form-input" placeholder="example@mail.com" required>
+                        <label for="email" class="form-label">Ваш Email *</label>
+                        <input type="email" id="email" th:field="*{email}" class="form-input"
+                               placeholder="example@mail.com" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="topic" class="form-label">Тема обращения</label>
-                        <select id="topic" class="form-input" required>
+                        <label for="topic" class="form-label">Тема обращения *</label>
+                        <select id="topic" th:field="*{topic}" class="form-input" required>
                             <option value="" disabled selected>Выберите тему</option>
-                            <option value="course">Выбор курса</option>
-                            <option value="tech">Техническая поддержка</option>
-                            <option value="payment">Вопросы по оплате</option>
-                            <option value="cooperation">Сотрудничество</option>
-                            <option value="other">Другое</option>
+                            <option value="Выбор курса">Выбор курса</option>
+                            <option value="Техническая поддержка">Техническая поддержка</option>
+                            <option value="Вопросы по оплате">Вопросы по оплате</option>
+                            <option value="Сотрудничество">Сотрудничество</option>
+                            <option value="Другое">Другое</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="message" class="form-label">Сообщение</label>
-                        <textarea id="message" class="form-textarea" placeholder="Опишите ваш вопрос или проблему..." required></textarea>
+                        <label for="message" class="form-label">Сообщение *</label>
+                        <textarea id="message" th:field="*{message}" class="form-textarea"
+                                  placeholder="Опишите ваш вопрос или проблему..." required></textarea>
                     </div>
 
-                    <button type="submit" class="btn-primary" style="width: 100%;">
+                    <button type="submit" class="btn-primary" style="width: 100%;" id="submitBtn">
                         Отправить сообщение
                     </button>
                 </form>
@@ -438,7 +444,6 @@
                     <div class="hours-title">Время ответа</div>
                     <div class="hours-text">
                         Мы отвечаем на письма в течение 24 часов в рабочие дни.
-                        На сообщения в мессенджерах отвечаем в течение 2-3 часов.
                     </div>
                 </div>
             </div>
@@ -448,15 +453,14 @@
             <div class="contacts-cta__content">
                 <h2 class="contacts-title">Нужна срочная помощь?</h2>
                 <p class="contacts-cta__text">
-                    Если у вас возникли срочные вопросы по текущему курсу или технические проблемы,
-                    напишите нам в Telegram или позвоните по телефону поддержки.
+                    Если у вас возникли срочные вопросы, напишите нам напрямую на почту или воспользуйтесь формой выше.
                 </p>
                 <div class="contacts-cta__buttons">
-                    <a href="https://t.me/ulton_support" class="btn-primary" target="_blank">
-                        Написать в Telegram
+                    <a href="mailto:uzhegov2006@gmail.com" class="btn-primary">
+                        Написать на почту
                     </a>
-                    <a href="tel:+78001234567" class="btn-ghost">
-                        Позвонить в поддержку
+                    <a th:href="@{/courses}" class="btn-ghost">
+                        Смотреть курсы
                     </a>
                 </div>
             </div>
@@ -498,18 +502,51 @@
         menu.addEventListener('mouseleave', () => activeLink && moveTo(activeLink));
         window.addEventListener('resize', () => activeLink && moveTo(activeLink));
 
-        // Обработка формы
+        // AJAX отправка формы (опционально)
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', function(e) {
+                const submitBtn = document.getElementById('submitBtn');
+                const originalText = submitBtn.textContent;
+
+                submitBtn.textContent = 'Отправка...';
+                submitBtn.disabled = true;
+
+                // Можно раскомментировать для AJAX отправки
+                /*
                 e.preventDefault();
 
-                // Здесь будет отправка данных на сервер
-                // Временно показываем уведомление
-                alert('Спасибо за обращение! Мы свяжемся с вами в ближайшее время.');
+                const formData = {
+                    name: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    topic: document.getElementById('topic').value,
+                    message: document.getElementById('message').value
+                };
 
-                // Очищаем форму
-                this.reset();
+                fetch('/api/contacts/send', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Сообщение отправлено! Мы скоро свяжемся с вами.');
+                        contactForm.reset();
+                    } else {
+                        alert('Ошибка: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    alert('Ошибка сети: ' + error);
+                })
+                .finally(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+                */
             });
         }
     });

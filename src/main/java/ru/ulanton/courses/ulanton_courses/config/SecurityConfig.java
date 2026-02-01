@@ -44,7 +44,12 @@ public class SecurityConfig {
                                 "/favicon.ico",
                                 "/about",
                                 "/hello",
-                                "/contacts"
+                                "/contacts",
+                                "/contacts/**",  // ← ДОБАВЬТЕ ЭТУ СТРОКУ! Разрешает все подпути /contacts/*
+                                "/contacts/send", // ← ИЛИ конкретно этот путь
+                                "/test-email",    // ← Для тестирования
+                                "/debug-email",   // ← Для отладки
+                                "/api/**"         // ← Для API если будете использовать
                         ).permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
