@@ -19,7 +19,7 @@
         <ul class="left-menu">
             <li class="menu-item"><a th:href="@{/}">Главная</a></li>
             <li class="menu-item"><a th:href="@{/allCourses}">Каталог курсов</a></li>
-            <li class="menu-item"><a href="#">Контакты</a></li>
+            <li class="menu-item"><a th:href="@{/contacts}">Контакты</a></li>
             <li class="menu-item menu-item-active"><a th:href="@{/about}">О нас</a></li>
 
             <span class="menu-underline no-anim" aria-hidden="true"></span>
@@ -43,26 +43,23 @@
             <div class="hero__content">
                 <h1>О <span class="it-accent">нас</span></h1>
                 <p class="hero__lead">
-                    Мы делаем IT‑обучение прикладным: учитесь короткими шагами, собираете проекты и растёте по понятной траектории.
+                    Мы делаем IT‑обучение прикладным: шаг за шагом, с мини-проектами и простым языком.
                 </p>
 
                 <div class="hero__cta">
-                    <a class="btn-primary" th:href="@{/courses}">Выбрать курс</a>
+                    <a class="btn-primary" th:href="@{/allCourses}">Выбрать курс</a>
                     <a class="btn-ghost" th:href="@{/contacts}">Задать вопрос</a>
                 </div>
 
                 <div class="hero__facts" aria-label="Короткие факты">
                     <div class="fact">
-                        <div class="fact__k">Практика</div>
-                        <div class="fact__v">в основе каждого модуля</div>
+                        <div class="fact__v">Теория</div>
                     </div>
                     <div class="fact">
-                        <div class="fact__k">Проекты</div>
-                        <div class="fact__v">в портфолио по пути</div>
+                        <div class="fact__v">Мини-Проекты</div>
                     </div>
                     <div class="fact">
-                        <div class="fact__k">Поддержка</div>
-                        <div class="fact__v">без ощущения «я один»</div>
+                        <div class="fact__v">Поддержка</div>
                     </div>
                 </div>
             </div>
@@ -169,7 +166,7 @@
                 </div>
                 <div class="cta__right">
                     <a class="btn-primary" th:href="@{/contacts}">Связаться</a>
-                    <a class="btn-ghost" th:href="@{/courses}">Смотреть курсы</a>
+                    <a class="btn-ghost" th:href="@{/allCourses}">Смотреть курсы</a>
                 </div>
             </div>
         </section>
@@ -246,13 +243,18 @@
       padding: 14px 14px;
       border-radius: 18px;
       background: rgba(0,0,0,0.16);
-      border: 1px solid rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.05); /* Уменьшена непрозрачность обводки */
+      display: flex; /* Добавлено для центрирования */
+      align-items: center; /* Вертикальное центрирование */
+      justify-content: center; /* Горизонтальное центрирование */
+      text-align: center; /* Центрирование текста */
     }
     .fact__k{
-      font-size: 13px;
+        font-size: 16px;
+        font-weight: 700;
+        color: rgba(255,255,255,0.92);
       letter-spacing: .12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.72);
       margin-bottom: 6px;
     }
     .fact__v{
