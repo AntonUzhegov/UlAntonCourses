@@ -39,6 +39,11 @@ public class MainController {
         return "about";
     }
 
+    @GetMapping("/contacts")
+    public String contacts() {
+        return "contacts";
+    }
+
     @GetMapping("/errors/404")
     public String error404(Model model) {
         model.addAttribute("errorMessage", "Ара, ну нима пока такой страницы, выходи");

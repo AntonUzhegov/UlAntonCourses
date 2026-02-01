@@ -1,10 +1,518 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - Ulton</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon">
+    <style>
+        /* Стили для страницы контактов */
+        .contacts-container {
+            padding-top: 8px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contacts-hero {
+            position: relative;
+            border-radius: 26px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.10);
+            background: rgba(255,255,255,0.06);
+            padding: clamp(22px, 3vw, 34px);
+            box-shadow: 0 22px 60px rgba(0,0,0,.28);
+            margin-bottom: 28px;
+        }
+
+        .contacts-hero__bg {
+            position: absolute;
+            inset: -2px;
+            background:
+                radial-gradient(600px 320px at 15% 25%, rgba(125,211,255,.22), transparent 60%),
+                radial-gradient(520px 320px at 60% 10%, rgba(167,139,250,.20), transparent 60%),
+                radial-gradient(560px 340px at 85% 70%, rgba(34,197,94,.18), transparent 62%);
+            filter: blur(2px);
+            opacity: .95;
+        }
+
+        .contacts-hero__content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contacts-title {
+            margin: 10px 0 16px;
+            font-size: clamp(22px, 2vw, 30px);
+            font-weight: 700;
+        }
+
+        .contacts-hero__lead {
+            margin-top: 10px;
+            max-width: 900px;
+            font-size: clamp(16px, 1.2vw, 20px);
+            line-height: 1.6;
+            color: rgba(255,255,255,0.90);
+            text-shadow: 0 12px 38px rgba(0,0,0,.25);
+        }
+
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 28px 0;
+        }
+
+        .contact-info {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 22px;
+            padding: 24px;
+        }
+
+        .contact-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 16px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(125,211,255,0.22);
+        }
+
+        .contact-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-card__title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.95);
+        }
+
+        .contact-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(125,211,255,0.15);
+            border-radius: 8px;
+            color: #7dd3ff;
+        }
+
+        .contact-card__content {
+            font-size: 16px;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.85);
+        }
+
+        .contact-card__content a {
+            color: #7dd3ff;
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .contact-card__content a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+
+        .contact-form {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.10);
+            border-radius: 22px;
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.9);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: rgba(125,211,255,0.5);
+            box-shadow: 0 0 0 3px rgba(125,211,255,0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: rgba(26,79,179,0.95);
+            border: 1px solid rgba(125,211,255,0.25);
+            color: white;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: transform .18s ease, background .18s ease;
+            box-shadow: 0 16px 40px rgba(0,0,0,.25);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: rgba(42,95,208,0.98);
+        }
+
+        .btn-ghost {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.14);
+            color: rgba(255,255,255,0.92);
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform .18s ease, border-color .18s ease;
+        }
+
+        .btn-ghost:hover {
+            transform: translateY(-2px);
+            border-color: rgba(125,211,255,0.22);
+        }
+
+        .contacts-cta {
+            margin: 28px 0;
+            text-align: center;
+        }
+
+        .contacts-cta__content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+        }
+
+        .contacts-cta__text {
+            font-size: 18px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 20px;
+        }
+
+        .contacts-cta__buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .hours-info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .hours-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 8px;
+        }
+
+        .hours-text {
+            font-size: 15px;
+            color: rgba(255,255,255,0.8);
+            line-height: 1.5;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 900px) {
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contacts-cta__buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary,
+            .btn-ghost {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .contact-info,
+            .contact-form {
+                padding: 20px;
+            }
+
+            .contacts-hero {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
+<header>
+    <nav>
+        <ul class="left-menu">
+            <li class="menu-item"><a th:href="@{/}">Главная</a></li>
+            <li class="menu-item"><a th:href="@{/allCourses}">Каталог курсов</a></li>
+            <li class="menu-item menu-item-active"><a th:href="@{/contacts}">Контакты</a></li>
+            <li class="menu-item"><a th:href="@{/about}">О нас</a></li>
+            <span class="menu-underline no-anim" aria-hidden="true"></span>
+        </ul>
+    </nav>
 
+    <div class="logo" style="opacity:0; pointer-events:none;">&nbsp;</div>
+
+    <nav>
+        <ul class="right-menu">
+            <li class="menu-item login-btn"><a th:href="@{/login}">Войти</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="content-container contacts-container">
+        <section class="contacts-hero">
+            <div class="contacts-hero__bg"></div>
+            <div class="contacts-hero__content">
+                <h1>Наши <span class="it-accent">контакты</span></h1>
+                <p class="contacts-hero__lead">
+                    Мы всегда на связи и готовы помочь вам с выбором курса, техническими вопросами или любыми другими обращениями.
+                </p>
+            </div>
+        </section>
+
+        <div class="contacts-grid">
+            <!-- Левая колонка: контактная информация -->
+            <div class="contact-info">
+                <h2 class="contacts-title">Свяжитесь с нами</h2>
+
+                <div class="contact-card">
+                    <div class="contact-card__title">
+                        <div class="contact-icon">📧</div>
+                        <span>Email</span>
+                    </div>
+                    <div class="contact-card__content">
+                        <p>Основные вопросы: <a href="mailto:support@ulton.com">support@ulton.com</a></p>
+                        <p>Техподдержка: <a href="mailto:tech@ulton.com">tech@ulton.com</a></p>
+                        <p>Сотрудничество: <a href="mailto:partners@ulton.com">partners@ulton.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-card__title">
+                        <div class="contact-icon">📞</div>
+                        <span>Телефон</span>
+                    </div>
+                    <div class="contact-card__content">
+                        <p>Телефон для связи: <a href="tel:+78001234567">8 (800) 123-45-67</a></p>
+                        <p>WhatsApp/Telegram: <a href="https://wa.me/79991234567">+7 (999) 123-45-67</a></p>
+                        <p>Звонок по России бесплатный</p>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-card__title">
+                        <div class="contact-icon">📍</div>
+                        <span>Адрес</span>
+                    </div>
+                    <div class="contact-card__content">
+                        <p>г. Москва, ул. Тверская, д. 7</p>
+                        <p>Бизнес-центр "Тверской"</p>
+                        <p>Этаж 5, офис 502</p>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-card__title">
+                        <div class="contact-icon">🕒</div>
+                        <span>Режим работы</span>
+                    </div>
+                    <div class="contact-card__content">
+                        <p>Понедельник - Пятница: 9:00 - 20:00</p>
+                        <p>Суббота: 10:00 - 18:00</p>
+                        <p>Воскресенье: выходной</p>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <div class="contact-card__title">
+                        <div class="contact-icon">💬</div>
+                        <span>Социальные сети</span>
+                    </div>
+                    <div class="contact-card__content">
+                        <p>Telegram: <a href="https://t.me/ulton_official">@ulton_official</a></p>
+                        <p>VK: <a href="https://vk.com/ulton">vk.com/ulton</a></p>
+                        <p>YouTube: <a href="https://youtube.com/c/Ulton">Ulton IT Education</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правая колонка: форма обратной связи -->
+            <div class="contact-form">
+                <h2 class="contacts-title">Форма обратной связи</h2>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">
+                    Заполните форму ниже, и мы свяжемся с вами в ближайшее время
+                </p>
+
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Ваше имя</label>
+                        <input type="text" id="name" class="form-input" placeholder="Иван Иванов" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-input" placeholder="example@mail.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="topic" class="form-label">Тема обращения</label>
+                        <select id="topic" class="form-input" required>
+                            <option value="" disabled selected>Выберите тему</option>
+                            <option value="course">Выбор курса</option>
+                            <option value="tech">Техническая поддержка</option>
+                            <option value="payment">Вопросы по оплате</option>
+                            <option value="cooperation">Сотрудничество</option>
+                            <option value="other">Другое</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">Сообщение</label>
+                        <textarea id="message" class="form-textarea" placeholder="Опишите ваш вопрос или проблему..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%;">
+                        Отправить сообщение
+                    </button>
+                </form>
+
+                <div class="hours-info">
+                    <div class="hours-title">Время ответа</div>
+                    <div class="hours-text">
+                        Мы отвечаем на письма в течение 24 часов в рабочие дни.
+                        На сообщения в мессенджерах отвечаем в течение 2-3 часов.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="contacts-cta">
+            <div class="contacts-cta__content">
+                <h2 class="contacts-title">Нужна срочная помощь?</h2>
+                <p class="contacts-cta__text">
+                    Если у вас возникли срочные вопросы по текущему курсу или технические проблемы,
+                    напишите нам в Telegram или позвоните по телефону поддержки.
+                </p>
+                <div class="contacts-cta__buttons">
+                    <a href="https://t.me/ulton_support" class="btn-primary" target="_blank">
+                        Написать в Telegram
+                    </a>
+                    <a href="tel:+78001234567" class="btn-ghost">
+                        Позвонить в поддержку
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Подчёркивание меню
+        const menu = document.querySelector('.left-menu');
+        if (!menu) return;
+
+        const underline = menu.querySelector('.menu-underline');
+        if (!underline) return;
+
+        const links = Array.from(menu.querySelectorAll('.menu-item a'));
+        const activeLink = menu.querySelector('.menu-item-active a') || links[0];
+
+        function moveTo(link) {
+            const r = link.getBoundingClientRect();
+            const mr = menu.getBoundingClientRect();
+            underline.style.width = r.width + 'px';
+            underline.style.transform = `translateX(${r.left - mr.left}px)`;
+        }
+
+        underline.classList.add('no-anim');
+        if (activeLink) moveTo(activeLink);
+
+        requestAnimationFrame(() => {
+            underline.classList.remove('no-anim');
+        });
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => moveTo(link));
+            link.addEventListener('focus', () => moveTo(link));
+        });
+
+        menu.addEventListener('mouseleave', () => activeLink && moveTo(activeLink));
+        window.addEventListener('resize', () => activeLink && moveTo(activeLink));
+
+        // Обработка формы
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Здесь будет отправка данных на сервер
+                // Временно показываем уведомление
+                alert('Спасибо за обращение! Мы свяжемся с вами в ближайшее время.');
+
+                // Очищаем форму
+                this.reset();
+            });
+        }
+    });
+</script>
 </body>
 </html>
