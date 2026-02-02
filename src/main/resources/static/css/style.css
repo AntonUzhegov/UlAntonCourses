@@ -47,8 +47,8 @@ header {
     color: transparent;
 
     text-shadow:
-        0 0 18px rgba(125, 211, 255, 0.25),
-        0 0 30px rgba(167, 139, 250, 0.18);
+            0 0 18px rgba(125, 211, 255, 0.25),
+            0 0 30px rgba(167, 139, 250, 0.18);
 
     user-select: none;
     cursor: default;
@@ -59,8 +59,6 @@ header {
     transform: translateX(-50%) scale(1.03);
     filter: brightness(1.15);
 }
-
-
 
 /* На маленьких экранах — не слишком огромная */
 @media (max-width: 1100px) {
@@ -93,7 +91,7 @@ header {
 }
 
 .menu-item a:hover {
-color: rgba(255,255,255,0.82);
+    color: rgba(255,255,255,0.82);
 }
 
 /* Класс для активного элемента меню */
@@ -118,7 +116,6 @@ color: rgba(255,255,255,0.82);
 /* Кнопка Войти */
 .login-btn {
     background-color: transparent;
-    /* padding: 10px 24px; */
     text-align: center;
     border-radius: 12px;
     transition: all 0.4s ease;
@@ -130,7 +127,6 @@ color: rgba(255,255,255,0.82);
     align-items: center;
     justify-content: center;
     border: 1px solid #6d9cf352;
-    /* box-shadow: 0 0 15px rgba(26, 79, 179, 0.3); */
 }
 
 .login-btn::before {
@@ -179,7 +175,6 @@ main {
 
 /* Контейнер для содержимого - простой вариант на padding */
 .content-container {
-    /* max-width: 1200px; */
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -239,20 +234,20 @@ h1 {
     }
 }
 
-h1{
-  font-size: clamp(30px, 3.2vw, 58px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  margin: 0 0 14px;
-  text-shadow: 0 14px 40px rgba(0,0,0,.35);
+h1 {
+    font-size: clamp(30px, 3.2vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    text-shadow: 0 14px 40px rgba(0,0,0,.35);
 }
 
-.it-accent{
-  color: transparent;
-  background: linear-gradient(90deg, #7dd3ff, #a78bfa);
-  -webkit-background-clip: text;
-  background-clip: text;
-  text-shadow: 0 0 22px rgba(125,211,255,.18);
+.it-accent {
+    color: transparent;
+    background: linear-gradient(90deg, #7dd3ff, #a78bfa);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-shadow: 0 0 22px rgba(125,211,255,.18);
 }
 
 /* Адаптивность для планшетов */
@@ -384,8 +379,6 @@ h1{
     letter-spacing: 1px;
 }
 
-
-
 .block-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(109, 69, 255, 0.15);
@@ -461,14 +454,14 @@ h1{
 }
 
 /* ===== Страница "Все курсы" (горизонтальные большие плитки) ===== */
-.course-list{
+.course-list {
     display: flex;
     flex-direction: column;
     gap: 22px;
     margin: 26px 0 40px;
 }
 
-.course-card{
+.course-card {
     display: grid;
     grid-template-columns: 1fr 320px;
     gap: 22px;
@@ -483,18 +476,18 @@ h1{
     overflow: hidden;
 }
 
-.course-card:hover{
+.course-card:hover {
     transform: translateY(-4px);
     background-color: rgba(255, 255, 255, 0.12);
     box-shadow: 0 18px 38px rgba(0,0,0,0.25);
     border-color: rgba(125, 211, 255, 0.18);
 }
 
-.course-card__left{
+.course-card__left {
     min-width: 0;
 }
 
-.course-card__badge{
+.course-card__badge {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -509,14 +502,14 @@ h1{
     margin-bottom: 12px;
 }
 
-.course-card__title{
+.course-card__title {
     font-size: 26px;
     font-weight: 600;
     line-height: 1.15;
     margin-bottom: 10px;
 }
 
-.course-card__meta{
+.course-card__meta {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -526,48 +519,147 @@ h1{
     margin-bottom: 12px;
 }
 
-.course-card__dot{
+.course-card__dot {
     opacity: 0.65;
 }
 
-.course-card__desc{
+.course-card__desc {
     font-size: 18px;
     line-height: 1.55;
     color: rgba(255,255,255,0.90);
     max-width: 820px;
 }
 
-.course-card__right{
+/* Обновляем структуру правой части карточки */
+.course-card__right {
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 16px;
+    min-width: 320px;
 }
 
-.course-card__stats{
+.course-card__stats {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
-    padding: 16px;
-    border-radius: 18px;
-    background: rgba(0,0,0,0.18);
-    border: 1px solid rgba(255,255,255,0.10);
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 1px rgba(125,211,255,0.06) inset;
 }
 
-.course-card__stat-label{
+/* при наведении на карточку — чуть заметнее */
+.course-card:hover .course-card__stats {
+    border-color: rgba(125,211,255,0.20);
+    box-shadow:
+            0 0 0 1px rgba(125,211,255,0.10) inset,
+            0 12px 28px rgba(0,0,0,0.16);
+}
+
+.course-card__stat {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-card__stat-label {
     font-size: 13px;
     color: rgba(255,255,255,0.70);
     margin-bottom: 6px;
 }
 
-.course-card__stat-value{
+.course-card__stat-value {
     font-size: 16px;
     font-weight: 600;
     color: rgba(255,255,255,0.92);
 }
 
+/* ===== Кнопка "Добавить" на карточках ===== */
+.course-card__add {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(26,79,179,0.75);
+    color: rgba(255,255,255,0.95);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: .02em;
+    cursor: pointer;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: transform .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.course-card__add:hover {
+    transform: translateY(-2px);
+    background: rgba(42,95,208,0.85);
+    border-color: rgba(125,211,255,0.22);
+    box-shadow: 0 12px 26px rgba(0,0,0,0.22);
+}
+
+.course-card__add:active {
+    transform: translateY(0px) scale(0.98);
+}
+
+.course-card__add--active {
+    background: rgba(34,197,94,0.28);
+    border-color: rgba(34,197,94,0.40);
+}
+
+/* Tooltip */
+.course-card__add::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 50%;
+    bottom: calc(100% + 10px);
+    white-space: nowrap;
+    padding: 8px 10px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.85);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.92);
+    font-size: 12px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(50%, 6px);
+    transition: opacity .14s ease, transform .14s ease;
+    z-index: 10;
+}
+
+.course-card__add::before {
+    content: "";
+    position: absolute;
+    right: 50%;
+    bottom: calc(100% + 4px);
+    width: 10px;
+    height: 10px;
+    background: rgba(0,0,0,0.85);
+    border-left: 1px solid rgba(255,255,255,0.14);
+    border-top: 1px solid rgba(255,255,255,0.14);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(50%) rotate(45deg) translateY(6px);
+    transition: opacity .14s ease, transform .14s ease;
+    z-index: 10;
+}
+
+.course-card__add:hover::after,
+.course-card__add:hover::before {
+    opacity: 1;
+    transform: translate(50%, 0);
+}
+
 /* Полоска прогресса снизу плитки */
-.course-card__progress{
+.course-card__progress {
     position: absolute;
     left: 0;
     right: 0;
@@ -576,376 +668,344 @@ h1{
     background: rgba(255,255,255,0.10);
 }
 
-.course-card__progress-bar{
+.course-card__progress-bar {
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, #7dd3ff, #a78bfa, #22c55e);
 }
 
 /* Адаптивность */
-@media (max-width: 992px){
-    .course-card{
+@media (max-width: 992px) {
+    .course-card {
         grid-template-columns: 1fr;
         padding: 24px 22px 20px;
     }
-    .course-card__right{
+
+    .course-card__right {
         justify-content: flex-start;
+        align-items: flex-start;
+        min-width: auto;
+        width: 100%;
     }
-    .course-card__stats{
-        grid-template-columns: 1fr 1fr;
+
+    .course-card__stats {
         max-width: 520px;
     }
 }
 
-@media (max-width: 600px){
-    .course-card__title{
+@media (max-width: 600px) {
+    .course-card__title {
         font-size: 22px;
     }
-    .course-card__desc{
+
+    .course-card__desc {
         font-size: 16px;
     }
-    .course-card__stats{
+
+    .course-card__stats {
         grid-template-columns: 1fr;
+    }
+
+    .course-card__right {
+        gap: 12px;
     }
 }
 
-.course-card__desc{ display:flex; flex-wrap:wrap; gap:8px; margin-top:10px; }
-.course-card__desc .chip{
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 13px;
-  font-weight: 600;
-  background: rgba(90,156,255,0.10);
-  border: 1px solid rgba(90,156,255,0.22);
-  color: rgba(255,255,255,0.92);
+.course-card__desc {
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:10px;
 }
-.course-card__desc .chip:hover{
-  background: rgba(125,211,255,0.14);
-  border-color: rgba(125,211,255,0.28);
+
+.course-card__desc .chip {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    background: rgba(90,156,255,0.10);
+    border: 1px solid rgba(90,156,255,0.22);
+    color: rgba(255,255,255,0.92);
+}
+
+.course-card__desc .chip:hover {
+    background: rgba(125,211,255,0.14);
+    border-color: rgba(125,211,255,0.28);
 }
 
 /* Базовый "премиум" вид бейджа */
-.course-card__badge{
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-
-  padding: 7px 14px;
-  border-radius: 999px;
-
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.14);
-  color: rgba(255,255,255,0.92);
-
-  box-shadow:
-    0 10px 26px rgba(0,0,0,.18),
-    0 0 0 1px rgba(255,255,255,.06) inset;
-  backdrop-filter: blur(10px);
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
+.course-card__badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.92);
+    box-shadow:
+            0 10px 26px rgba(0,0,0,.18),
+            0 0 0 1px rgba(255,255,255,.06) inset;
+    backdrop-filter: blur(10px);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease, background .2s ease;
 }
 
-.course-card__badge::before{
-  content:"";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: currentColor;
-  box-shadow: 0 0 16px rgba(255,255,255,0.12);
-  opacity: .95;
+.course-card__badge::before {
+    content:"";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 16px rgba(255,255,255,0.12);
+    opacity: .95;
 }
 
-.course-card:hover .course-card__badge{
-  transform: translateY(-1px);
-  box-shadow:
-    0 14px 34px rgba(0,0,0,.22),
-    0 0 26px rgba(255,255,255,.08);
+.course-card:hover .course-card__badge {
+    transform: translateY(-1px);
+    box-shadow:
+            0 14px 34px rgba(0,0,0,.22),
+            0 0 26px rgba(255,255,255,.08);
 }
 
 /* Цвета по классам */
-.course-card__badge.badge--backend { color:#22c55e; background:linear-gradient(90deg, rgba(34,197,94,.18),  rgba(34,197,94,.08));  border-color:rgba(34,197,94,.28);  }
-.course-card__badge.badge--base    { color: #ff6b6b; background: linear-gradient(90deg, rgba(255,107,107,.18), rgba(255,107,107,.08));  border-color: rgba(255,107,107,.28); }
-.course-card__badge.badge--adv     { color:#a78bfa; background:linear-gradient(90deg, rgba(167,139,250,.20), rgba(167,139,250,.08)); border-color:rgba(167,139,250,.30); }
-.course-card__badge.badge--python  { color:#fbbf24; background:linear-gradient(90deg, rgba(251,191,36,.22),  rgba(251,191,36,.08));  border-color:rgba(251,191,36,.30); }
-.course-card__badge.badge--data    { color:#22d3ee; background:linear-gradient(90deg, rgba(34,211,238,.20), rgba(34,211,238,.08)); border-color:rgba(34,211,238,.30); }
-
-/* Статы: только обводка (без отдельной темной плашки) */
-.course-card__stats{
-  background: transparent;              /* убираем заливку */
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 16px;
-  padding: 14px 16px;
-  box-shadow: 0 0 0 1px rgba(125,211,255,0.06) inset;
+.course-card__badge.badge--backend {
+    color:#22c55e;
+    background:linear-gradient(90deg, rgba(34,197,94,.18),  rgba(34,197,94,.08));
+    border-color:rgba(34,197,94,.28);
 }
 
-/* при наведении на карточку — чуть заметнее */
-.course-card:hover .course-card__stats{
-  border-color: rgba(125,211,255,0.20);
-  box-shadow:
-    0 0 0 1px rgba(125,211,255,0.10) inset,
-    0 12px 28px rgba(0,0,0,0.16);
+.course-card__badge.badge--base {
+    color: #ff6b6b;
+    background: linear-gradient(90deg, rgba(255,107,107,.18), rgba(255,107,107,.08));
+    border-color: rgba(255,107,107,.28);
 }
 
-/* без "квадратов" у внутренних блоков */
-.course-card__stat{
-  background: transparent;
-  border: 0;
-  padding: 0;
+.course-card__badge.badge--adv {
+    color:#a78bfa;
+    background:linear-gradient(90deg, rgba(167,139,250,.20), rgba(167,139,250,.08));
+    border-color:rgba(167,139,250,.30);
+}
+
+.course-card__badge.badge--python {
+    color:#fbbf24;
+    background:linear-gradient(90deg, rgba(251,191,36,.22),  rgba(251,191,36,.08));
+    border-color:rgba(251,191,36,.30);
+}
+
+.course-card__badge.badge--data {
+    color:#22d3ee;
+    background:linear-gradient(90deg, rgba(34,211,238,.20), rgba(34,211,238,.08));
+    border-color:rgba(34,211,238,.30);
 }
 
 /* Только у активного пункта есть полоска */
-.menu-item-active a{
-  position: relative;
+.menu-item-active a {
+    position: relative;
 }
 
 /* Базовая "тонкая" полоска, центрируем её */
-.menu-item-active a::after{
-  content: '';
-  position: absolute;
-  left: 0;
-  top: calc(100% + 6px);              /* чуть ниже текста */
-  width: 100%;
-  height: 3px;                        /* базовая толщина */
-  border-radius: 999px;
-
-background: rgba(45,212,191,0.40);  /* важное: центр полоски и симметричный рост */
-  transform-origin: center;
-  transform: translateY(-50%) scaleY(0.55);
-  transition: transform .18s ease, background-color .18s ease;
+.menu-item-active a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: calc(100% + 6px);
+    width: 100%;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(45,212,191,0.40);
+    transform-origin: center;
+    transform: translateY(-50%) scaleY(0.55);
+    transition: transform .18s ease, background-color .18s ease;
 }
 
 /* На hover у активного — расширяем вверх/вниз (scaleY) */
-.menu-item-active a:hover::after{
-background: rgba(45,212,191,0.65);
-  transform: translateY(-50%) scaleY(1.35);
-}
-
-/* ===== Кнопка "Добавить" на карточках ===== */
-.course-card__add{
-  position: absolute;
-  right: 18px;
-  bottom: 16px;
-  z-index: 3;
-
-  padding: 10px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.18);
-  background: rgba(26,79,179,0.75);
-  color: rgba(255,255,255,0.95);
-  font-family: inherit;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: .02em;
-  cursor: pointer;
-
-  backdrop-filter: blur(10px);
-  transition: transform .15s ease, background-color .15s ease, border-color .15s ease, box-shadow .15s ease;
-}
-
-.course-card__add:hover{
-  transform: translateY(-1px);
-  background: rgba(42,95,208,0.85);
-  border-color: rgba(125,211,255,0.22);
-  box-shadow: 0 12px 26px rgba(0,0,0,0.22);
-}
-
-.course-card__add:active{
-  transform: translateY(0px) scale(0.98);
-}
-
-.course-card__add--active{
-  background: rgba(34,197,94,0.28);
-  border-color: rgba(34,197,94,0.40);
-}
-
-/* Tooltip */
-.course-card__add::after{
-  content: attr(data-tooltip);
-  position: absolute;
-  right: 0;
-  bottom: calc(100% + 10px);
-
-  white-space: nowrap;
-  padding: 8px 10px;
-  border-radius: 10px;
-
-  background: rgba(0,0,0,0.85);
-  border: 1px solid rgba(255,255,255,0.14);
-  color: rgba(255,255,255,0.92);
-  font-size: 12px;
-  font-weight: 600;
-
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(6px);
-  transition: opacity .14s ease, transform .14s ease;
-}
-
-.course-card__add::before{
-  content: "";
-  position: absolute;
-  right: 18px;
-  bottom: calc(100% + 4px);
-  width: 10px;
-  height: 10px;
-  transform: rotate(45deg) translateY(6px);
-  background: rgba(0,0,0,0.85);
-  border-left: 1px solid rgba(255,255,255,0.14);
-  border-top: 1px solid rgba(255,255,255,0.14);
-
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .14s ease, transform .14s ease;
-}
-
-.course-card__add:hover::after,
-.course-card__add:hover::before{
-  opacity: 1;
-  transform: translateY(0);
+.menu-item-active a:hover::after {
+    background: rgba(45,212,191,0.65);
+    transform: translateY(-50%) scaleY(1.35);
 }
 
 /* === Smooth moving underline (single element) === */
-.left-menu { position: relative; }
-
-.left-menu .menu-underline{
-  position: absolute;
-  height: 3px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.95);
-  bottom: -6px;
-  left: 0;
-
-  width: 0;                 /* set by JS */
-  transform: translateX(0);
-  transition: transform .22s ease, width .22s ease, height .12s ease;
+.left-menu {
+    position: relative;
 }
 
-.left-menu .menu-underline.no-anim{
-  transition: none !important;
+.left-menu .menu-underline {
+    position: absolute;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.95);
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    transform: translateX(0);
+    transition: transform .22s ease, width .22s ease, height .12s ease;
+}
+
+.left-menu .menu-underline.no-anim {
+    transition: none !important;
 }
 
 /* Disable old underline if present */
-.left-menu .menu-item-active a::after{
-  display: none !important;
+.left-menu .menu-item-active a::after {
+    display: none !important;
 }
 
 /* Левый блок: список уроков со скроллом */
 .lesson-list {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  /* высота и скролл */
-  max-height: 520px;      /* подгони под себя */
-  overflow-y: auto;
-  padding-right: 6px;     /* чтобы скролл не наезжал на контент */
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 6px;
 }
 
 /* элементы */
 .lesson-item {
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  color: rgba(255,255,255,0.88);
-  text-decoration: none;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.88);
+    text-decoration: none;
 }
 
 .lesson-item--active {
-  background: rgba(125,211,255,0.14);
-  border: 1px solid rgba(125,211,255,0.25);
-  color: rgba(255,255,255,0.95);
+    background: rgba(125,211,255,0.14);
+    border: 1px solid rgba(125,211,255,0.25);
+    color: rgba(255,255,255,0.95);
 }
 
 /* ===== Lesson layout ===== */
 .lesson {
-  margin-top: 12px;
+    margin-top: 12px;
 }
 
 .lesson-header {
-  margin-bottom: 14px;
+    margin-bottom: 14px;
 }
 
 .lesson-title {
-  font-size: 22px;
-  margin: 0 0 6px;
-  letter-spacing: 0.2px;
+    font-size: 22px;
+    margin: 0 0 6px;
+    letter-spacing: 0.2px;
 }
 
 .lesson-subtitle {
-  margin: 0;
-  opacity: 0.85;
-  line-height: 1.5;
+    margin: 0;
+    opacity: 0.85;
+    line-height: 1.5;
 }
 
 /* ===== Content typography ===== */
 .lesson-content {
-  font-size: 16px;
-  line-height: 1.75;
-  opacity: 0.95;
+    font-size: 16px;
+    line-height: 1.75;
+    opacity: 0.95;
 }
 
 .lesson-content h3 {
-  margin: 18px 0 10px;
-  font-size: 17px;
+    margin: 18px 0 10px;
+    font-size: 17px;
 }
 
 .lesson-content p {
-  margin: 10px 0;
+    margin: 10px 0;
 }
 
 .lesson-content ul,
 .lesson-content ol {
-  margin: 10px 0 10px 22px;
+    margin: 10px 0 10px 22px;
 }
 
 .lesson-content li {
-  margin: 6px 0;
+    margin: 6px 0;
 }
 
 .lesson-content code {
-  padding: 2px 6px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.10);
-  font-size: 0.95em;
+    padding: 2px 6px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.10);
+    font-size: 0.95em;
 }
 
 /* ===== Code block ===== */
 .code-block {
-  margin: 14px 0;
-  padding: 14px;
-  border-radius: 14px;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.10);
-  overflow: auto;
+    margin: 14px 0;
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.10);
+    overflow: auto;
 }
 
 .code-block code {
-  padding: 0;
-  border: none;
-  background: transparent;
-  font-size: 14px;
-  line-height: 1.7;
-  white-space: pre;
-  display: block;
+    padding: 0;
+    border: none;
+    background: transparent;
+    font-size: 14px;
+    line-height: 1.7;
+    white-space: pre;
+    display: block;
 }
 
 /* ===== Note block ===== */
 .note {
-  margin: 14px 0 0;
-  padding: 12px 12px;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
+    margin: 14px 0 0;
+    padding: 12px 12px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
 }
 
 .note strong {
-  opacity: 0.95;
+    opacity: 0.95;
+}
+
+/* Кнопка для неавторизованных пользователей - обычный цвет, текст "Учиться" */
+.course-card__add:not([data-is-authenticated="true"]) {
+    /* Оставляем обычные стили, только меняем текст через Thymeleaf */
+    background: rgba(26, 79, 179, 0.75);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: rgba(255, 255, 255, 0.95);
+    cursor: pointer;
+}
+
+.course-card__add:not([data-is-authenticated="true"]):hover {
+    background: rgba(42, 95, 208, 0.85);
+    border-color: rgba(125, 211, 255, 0.22);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+}
+
+/* Тултип для неавторизованных пользователей */
+.course-card__add:not([data-is-authenticated="true"])::after {
+    content: "Требуется авторизация" !important;
+}
+
+/* Кнопка для авторизованных пользователей - обычные стили */
+.course-card__add[data-is-authenticated="true"] {
+    background: rgba(26, 79, 179, 0.75);
+    border-color: rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+}
+
+.course-card__add[data-is-authenticated="true"]:hover {
+    background: rgba(42, 95, 208, 0.85);
+    border-color: rgba(125, 211, 255, 0.22);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+}
+
+/* Состояние "добавлено" */
+.course-card__add--active {
+    background: rgba(34, 197, 94, 0.28) !important;
+    border-color: rgba(34, 197, 94, 0.40) !important;
 }

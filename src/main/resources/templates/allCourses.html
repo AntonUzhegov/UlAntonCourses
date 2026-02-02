@@ -25,7 +25,11 @@
     </nav>
     <div class="logo">Ul<span class="logo-accent">ton</span></div> <nav>
     <ul class="right-menu">
-        <li class="menu-item login-btn"><a href="#">Войти</a></li>
+        <li class="menu-item login-btn">
+            <a th:href="@{/login}" th:text="${session.user != null ? 'Профиль' : 'Войти'}">
+                Войти
+            </a>
+        </li>
     </ul>
 </nav>
 </header>
@@ -35,7 +39,7 @@
         <div class="course-list">
             <a class="course-card"
                th:each="c : ${courses}"
-               th:href="@{/courses/{slug}(slug=${c.slug})}"
+               th:href="${session.user != null ? '/courses/{slug}(slug=${c.slug})' : '/login'}"
                th:attr="aria-label=${'Открыть курс ' + c.title}">
 
                 <div class="course-card__left">
@@ -65,77 +69,108 @@
                             <div class="course-card__stat-value">Сейчас</div>
                         </div>
                     </div>
-                </div>
 
-                <button class="course-card__add"
-                        type="button"
-                        data-tooltip="добавить в мои курсы"
-                        aria-label="Добавить в мои курсы">
-                    Добавить
-                </button>
+                    <!-- Кнопка с разным текстом в зависимости от авторизации -->
+                    <button class="course-card__add"
+                            type="button"
+                            th:attr="data-is-authenticated=${session.user != null}"
+                            th:text="${session.user != null ? 'Добавить' : 'Учиться'}">
+                        Добавить
+                    </button>
+                </div>
             </a>
         </div>
     </div>
 </main>
 <script>
+    // Скрипт для бейджей
     document.querySelectorAll('.course-card__badge').forEach(badge => {
-      const t = badge.textContent.trim().toLowerCase();
+        const t = badge.textContent.trim().toLowerCase();
 
-      badge.classList.remove('badge--backend','badge--base','badge--adv','badge--python','badge--data');
+        badge.classList.remove('badge--backend','badge--base','badge--adv','badge--python','badge--data');
 
-      if (t === 'backend') badge.classList.add('badge--backend');
-      else if (t === 'base') badge.classList.add('badge--base');
-      else if (t === 'advanced') badge.classList.add('badge--adv');
-      else if (t === 'python') badge.classList.add('badge--python');
-      else if (t === 'data') badge.classList.add('badge--data');
+        if (t === 'backend') badge.classList.add('badge--backend');
+        else if (t === 'base') badge.classList.add('badge--base');
+        else if (t === 'advanced') badge.classList.add('badge--adv');
+        else if (t === 'python') badge.classList.add('badge--python');
+        else if (t === 'data') badge.classList.add('badge--data');
     });
-</script>
-<script>// Кнопка "Добавить" внутри кликабельной карточки-ссылки: не даём ей открывать курс
-document.querySelectorAll('.course-card__add').forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    // TODO: тут можно вызвать ваш API/логику добавления курса
-    btn.classList.toggle('course-card__add--active');
-    btn.textContent = btn.classList.contains('course-card__add--active') ? 'Добавлено' : 'Добавить';
-  });
-});</script>
-<script>
+
+    // Кнопка "Добавить"/"Учиться" - обработка клика
+    document.querySelectorAll('.course-card__add').forEach(btn => {
+        // Проверяем авторизацию
+        const isAuthenticated = btn.getAttribute('data-is-authenticated') === 'true';
+
+        if (isAuthenticated) {
+            // Только для авторизованных устанавливаем тултип
+            btn.setAttribute('data-tooltip', 'добавить в мои курсы');
+        } else {
+            // Для неавторизованных убираем тултип
+            btn.removeAttribute('data-tooltip');
+            // Убираем псевдоэлементы тултипа через CSS
+            btn.classList.add('no-tooltip');
+        }
+
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (!isAuthenticated) {
+                // Если не авторизован, перенаправляем на /login
+                window.location.href = '/login';
+                return;
+            }
+
+            // Если авторизован, выполняем логику добавления курса
+            console.log('Добавляем курс...');
+
+            // Переключаем состояние кнопки
+            btn.classList.toggle('course-card__add--active');
+            btn.textContent = btn.classList.contains('course-card__add--active') ? 'Добавлено' : 'Добавить';
+
+            // Обновляем тултип
+            btn.setAttribute('data-tooltip',
+                btn.classList.contains('course-card__add--active')
+                    ? 'курс добавлен в ваше обучение'
+                    : 'добавить в мои курсы');
+        });
+    });
+
+    // Скрипт для анимации подчёркивания меню
     document.addEventListener('DOMContentLoaded', () => {
-      const menu = document.querySelector('.left-menu');
-      if (!menu) return;
+        const menu = document.querySelector('.left-menu');
+        if (!menu) return;
 
-      const underline = menu.querySelector('.menu-underline');
-      if (!underline) return;
+        const underline = menu.querySelector('.menu-underline');
+        if (!underline) return;
 
-      const links = Array.from(menu.querySelectorAll('.menu-item a'));
-      const activeLink = menu.querySelector('.menu-item-active a') || links[0];
+        const links = Array.from(menu.querySelectorAll('.menu-item a'));
+        const activeLink = menu.querySelector('.menu-item-active a') || links[0];
 
-      function moveTo(link){
-        const r = link.getBoundingClientRect();
-        const mr = menu.getBoundingClientRect();
-        underline.style.width = r.width + 'px';
-        underline.style.transform = `translateX(${r.left - mr.left}px)`;
-      }
+        function moveTo(link){
+            const r = link.getBoundingClientRect();
+            const mr = menu.getBoundingClientRect();
+            underline.style.width = r.width + 'px';
+            underline.style.transform = `translateX(${r.left - mr.left}px)`;
+        }
 
-      // Place instantly under active (no animation)
-      underline.classList.add('no-anim');
-      if (activeLink) moveTo(activeLink);
+        // Place instantly under active (no animation)
+        underline.classList.add('no-anim');
+        if (activeLink) moveTo(activeLink);
 
-      // Enable animation after first paint
-      requestAnimationFrame(() => {
-        underline.classList.remove('no-anim');
-      });
+        // Enable animation after first paint
+        requestAnimationFrame(() => {
+            underline.classList.remove('no-anim');
+        });
 
-      links.forEach(link => {
-        link.addEventListener('mouseenter', () => moveTo(link));
-        link.addEventListener('focus', () => moveTo(link));
-      });
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => moveTo(link));
+            link.addEventListener('focus', () => moveTo(link));
+        });
 
-      menu.addEventListener('mouseleave', () => activeLink && moveTo(activeLink));
-      window.addEventListener('resize', () => activeLink && moveTo(activeLink));
+        menu.addEventListener('mouseleave', () => activeLink && moveTo(activeLink));
+        window.addEventListener('resize', () => activeLink && moveTo(activeLink));
     });
 </script>
-
 </body>
 </html>
